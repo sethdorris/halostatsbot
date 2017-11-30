@@ -48,11 +48,13 @@ function buildEmbed(data, author) {
     var headshots = data.playerstats.stats[22].value;
     var kd = (kills / deaths).toFixed(2);
     var hours = data.playerstats.stats[2].value / 60 / 60;
+    var accuracy = (headshots / hits);
+    var hper = (headshots / shots);
     console.log("shots", shots);
     console.log("hits", hits);
     console.log("headshots", headshots);
-    console.log("accuracy ", Math.round(hits / shots));
-    console.log("headshot % ", Math.round(headshots / hits));
+    console.log("accuracy ", accuracy);
+    console.log("headshot % ", hper);
     return {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,

@@ -28,12 +28,16 @@ bot.on('message', message => {
         console.log("Stats Firing");
         var sid = message.content.substring(5);
         console.log("SID : ", sid);
-        stats.getStats(sid,
-            data => {
-                var embed = buildEmbed(data, message.author);
-                var richEmbed = new Discord.RichEmbed(embed);
-                message.channel.send("here ya go", { embed: richEmbed });
-            });
+        try {
+            stats.getStats(sid,
+                data => {
+                    var embed = buildEmbed(data, message.author);
+                    var richEmbed = new Discord.RichEmbed(embed);
+                    message.channel.send("here ya go", { embed: richEmbed });
+                });
+        } catch (e) {
+            console.log(e)
+        }
     }
 });
 

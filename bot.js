@@ -12,7 +12,8 @@ bot.on("ready", () => {
 });
 
 bot.on("guildMemberAdd", member => {
-    
+    var role = member.guild.roles.find("name", "Visitor");
+    member.addRole(role);
 });
 
 bot.on('message', message => {
@@ -22,9 +23,7 @@ bot.on('message', message => {
       message.channel.send('pong');
     }
     if (message.content.substring(0, 6) === "!stats") {
-        console.log("Stats Firing");
         var sid = message.content.substring(7);
-        console.log("SID : ", sid);
         try {
             stats.getStats(sid,
                 data => {
@@ -39,8 +38,6 @@ bot.on('message', message => {
 });
 
 function buildEmbed(data, author) {
-    console.log("API Data", data);
-    console.log("Player Stats", data.playerstats.stats);
     var kills = data.playerstats.stats[0].value;
     var deaths = data.playerstats.stats[1].value;
     var shots = data.playerstats.stats[42].value;
@@ -50,11 +47,6 @@ function buildEmbed(data, author) {
     var hours = data.playerstats.stats[2].value / 60 / 60;
     var accuracy = (hits / shots) * 100;
     var hper = (headshots / kills) * 100;
-    console.log("shots", shots);
-    console.log("hits", hits);
-    console.log("headshots", headshots);
-    console.log("accuracy ", Math.round(accuracy));
-    console.log("headshot % ", Math.round(hper));
     return {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,

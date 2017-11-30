@@ -43,9 +43,11 @@ bot.on('message', message => {
 
 function buildEmbed(data, author) {
     console.log("API Data", data);
-    console.log("Player Stats", data.playerstats.stats)
-    var kd = (data.playerstats.stats.total_kills / data.playerstats.stats.total_deaths).toFixed(2);
-    var hours = data.playerstats.stats.total_time_played / 60 / 60;
+    console.log("Player Stats", data.playerstats.stats);
+    var kills = data.playerstats.stats[0].value;
+    var deaths = data.playerstats.stats[1].value;
+    var kd = (kills / deaths).toFixed(2);
+    var hours = data.playerstats.stats[2].value / 60 / 60;
     return {
         title: "CS GO Stats",
         description: `Here is the stats for ${author}`,
@@ -53,12 +55,12 @@ function buildEmbed(data, author) {
         fields: [
             {
                 name: "Kills",
-                value: data.playerstats.stats.total_kills.toString(),
+                value: kills.toString(),
                 inline: true
             },
             {
                 name: "Deaths",
-                value: data.playerstats.stats.total_deaths.toString(),
+                value: deaths.toString(),
                 inline: true
             },
             {

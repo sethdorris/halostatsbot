@@ -12,7 +12,7 @@ bot.on("ready", () => {
 });
 
 bot.on("guildMemberAdd", member => {
-    //
+    
 });
 
 bot.on('message', message => {
@@ -29,13 +29,12 @@ bot.on('message', message => {
         var sid = message.content.substring(5);
         console.log("SID : ", sid);
         try {
-            //stats.getStats(sid,
-            //    data => {
-            //        var embed = buildEmbed(data, message.author);
-            //        var richEmbed = new Discord.RichEmbed(embed);
-            //        message.channel.send("here ya go", { embed: richEmbed });
-            //    });
-            var player = await stats.getStats(sid);
+            stats.getStats(sid,
+                data => {
+                    var embed = buildEmbed(data, message.author);
+                    var richEmbed = new Discord.RichEmbed(embed);
+                    message.channel.send("here ya go", { embed: richEmbed });
+                });
         } catch (e) {
             console.log(e)
         }
@@ -47,6 +46,9 @@ function buildEmbed(data, author) {
     console.log("Player Stats", data.playerstats.stats);
     var kills = data.playerstats.stats[0].value;
     var deaths = data.playerstats.stats[1].value;
+    var shots = data.playerstats.stats[43].value;
+    var hits = data.playerstats.stats[42].value;
+    var headshots = data.playerstats.stats[23].value;
     var kd = (kills / deaths).toFixed(2);
     var hours = data.playerstats.stats[2].value / 60 / 60;
     return {
@@ -71,7 +73,19 @@ function buildEmbed(data, author) {
             },
             {
                 name: "Hours Played",
-                value: Math.round(hours).toString()                
+                value: Math.round(hours).toString(),
+                inline: true               
+            },
+            {
+                name: "Accuracy",
+                value: Math.round(hits / shots).toString(),
+                inline: true
+
+            },
+            {
+                name: "% Kills With Headshot",
+                value: Math.round(headshots / kills),
+                inline: true
             }
         ],
         footer: { text : "If you have ideas for additional stats let BruiseR- know!"}

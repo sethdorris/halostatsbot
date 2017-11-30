@@ -13,7 +13,7 @@ bot.on("ready", () => {
 
 bot.on("guildMemberAdd", member => {
     var role = member.guild.roles.find("name", "Visitor");
-    member.addRole(role);
+    member.addRole(role).catch(err => console.log(err));
 });
 
 bot.on('message', message => {

@@ -12,7 +12,7 @@ bot.on("ready", () => {
 });
 
 bot.on("guildMemberAdd", member => {
-    console.log(member);
+    //
 });
 
 bot.on('message', message => {
@@ -29,12 +29,13 @@ bot.on('message', message => {
         var sid = message.content.substring(5);
         console.log("SID : ", sid);
         try {
-            stats.getStats(sid,
-                data => {
-                    var embed = buildEmbed(data, message.author);
-                    var richEmbed = new Discord.RichEmbed(embed);
-                    message.channel.send("here ya go", { embed: richEmbed });
-                });
+            //stats.getStats(sid,
+            //    data => {
+            //        var embed = buildEmbed(data, message.author);
+            //        var richEmbed = new Discord.RichEmbed(embed);
+            //        message.channel.send("here ya go", { embed: richEmbed });
+            //    });
+            var player = await stats.getStats(sid);
         } catch (e) {
             console.log(e)
         }

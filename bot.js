@@ -28,7 +28,10 @@ bot.on('message', message => {
         try {
             var p1 = fetch(`http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${
                     APIKey}&steamid=${sid}`)
-                .then(data => { return data.body });
+                .then(data => {
+                    console.log("heres the call", data);
+                    return data.data;
+                });
             Promise.all([p1]).then(
                 (player) => {
                     var embed = buildEmbed(player, message.author);

@@ -43,6 +43,7 @@ bot.on('message', message => {
 
 function buildEmbed(data, author) {
     console.log("API Data", data);
+    console.log("Player Stats", data.playerstats.stats)
     var kd = (data.playerstats.stats.total_kills / data.playerstats.stats.total_deaths).toFixed(2);
     var hours = data.playerstats.stats.total_time_played / 60 / 60;
     return {

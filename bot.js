@@ -1,8 +1,7 @@
 var Discord = require('discord.js');
 var fetch = require('node-fetch');
 //STEAM API KEY 61862B8B86AADC4D73B2A69E5CE28D3D
-var csgoStats = require('csgostatsnode');
-var stats = new csgoStats({ "apikey": "61862B8B86AADC4D73B2A69E5CE28D3D" });
+var APIKey = "61862B8B86AADC4D73B2A69E5CE28D3D";
 var bot = new Discord.Client();
 bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
 
@@ -28,7 +27,7 @@ bot.on('message', message => {
         console.log("SID : ", sid);
         try {
             var p1 = fetch(`http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${
-                    APIKey}&steamid=${steamID}`)
+                    APIKey}&steamid=${sid}`)
                 .then(data => { return data.body });
             Promise.all([p1],
                 (player) => {

@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "description": "Discord welcome bot that provides CSGO stats for new users",
     "main": "bot.js",
-    "scripts": {
-        "start" :  "node bot.js" 
+    "author": {
+        "name": "sdorris"
     },
-  "author": {
-    "name": "sdorris"
+  "engines": {
+    "node": "8.6.0"
   },
   "dependencies": {
     "csgostatsnode": "^1.1.1",

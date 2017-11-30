@@ -47,3 +47,5 @@ build/config.*
 heroku
 build/bundle.js.map
 
+
+keys.js

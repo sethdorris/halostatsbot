@@ -11,6 +11,13 @@
   },
   "dependencies": {
     "csgostatsnode": "^1.1.1",
-    "discord.js": "^11.2.1"
+    "discord.js": "^11.2.1",
+    "bufferutil": "^3.0.2",
+    "erlpack": "*",
+    "node-opus": "^0.2.6",
+    "opusscript": "^0.0.3",
+    "sodium": "^2.0.1",
+    "libsodium-wrappers": "0.5.4",
+    "uws": "^0.14.5"
   }
 }

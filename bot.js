@@ -1,6 +1,6 @@
 var Discord = require('discord.js');
 //STEAM API KEY 61862B8B86AADC4D73B2A69E5CE28D3D
-var csgoStats = require('csgoStatsNode');
+var csgoStats = require('csgostatsnode');
 var stats = new csgoStats({ "apikey": "61862B8B86AADC4D73B2A69E5CE28D3D" });
 var bot = new Discord.Client();
 bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");

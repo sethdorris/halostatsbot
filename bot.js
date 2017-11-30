@@ -1,11 +1,9 @@
 var Discord = require('discord.js');
-var apiKey = require('./keys').APIKey;
-var clientId = require('./keys').ClientId;
-//STEAM API KEY 61862B8B86AADC4D73B2A69E5CE28D3D
+var keys = require('./keys');
 var csgoStats = require('csgostatsnode');
-var stats = new csgoStats({ "apikey": apiKey });
+var stats = new csgoStats({ "apikey": keys.apiKey });
 var bot = new Discord.Client();
-bot.login(clientId);
+bot.login(keys.clientId);
 
 console.log(bot);
 
@@ -41,8 +39,6 @@ bot.on('message', message => {
 });
 
 function buildEmbed(data, author) {
-    console.log("API Data", data);
-    console.log("Player Stats", data.playerstats.stats);
     var kills = data.playerstats.stats[0].value;
     var deaths = data.playerstats.stats[1].value;
     var shots = data.playerstats.stats[42].value;
@@ -52,11 +48,7 @@ function buildEmbed(data, author) {
     var hours = data.playerstats.stats[2].value / 60 / 60;
     var accuracy = (hits / shots) * 100;
     var hper = (headshots / kills) * 100;
-    console.log("shots", shots);
-    console.log("hits", hits);
-    console.log("headshots", headshots);
-    console.log("accuracy ", Math.round(accuracy));
-    console.log("headshot % ", Math.round(hper));
+
     return {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,

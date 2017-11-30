@@ -70,7 +70,7 @@ function buildEmbed(data, author) {
             },
             {
                 name: "Hours Played",
-                value: hours.round().toString()                
+                value: Math.round(hours).toString()                
             }
         ],
         footer: "If you have ideas for additional stats let BruiseR- know!"

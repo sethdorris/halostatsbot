@@ -1,4 +1,5 @@
 var Discord = require('discord.js');
+var fetch = require('node-fetch');
 //STEAM API KEY 61862B8B86AADC4D73B2A69E5CE28D3D
 var csgoStats = require('csgostatsnode');
 var stats = new csgoStats({ "apikey": "61862B8B86AADC4D73B2A69E5CE28D3D" });
@@ -26,12 +27,21 @@ bot.on('message', message => {
         var sid = message.content.substring(7);
         console.log("SID : ", sid);
         try {
-            stats.getStats(sid,
-                data => {
-                    var embed = buildEmbed(data, message.author);
+            var p1 = fetch(`http://api.steampowered.com/ISteamUserStats/GetUserStatsForGame/v0002/?appid=730&key=${
+                    APIKey}&steamid=${steamID}`)
+                .then(data => { return data.body });
+            Promise.all([p1],
+                (player) => {
+                    var embed = buildEmbed(player, message.author);
                     var richEmbed = new Discord.RichEmbed(embed);
-                    message.channel.send("here ya go", { embed: richEmbed });
+                    message.channel.send({ embed: richEmbed });
                 });
+            //stats.getStats(sid,
+            //    data => {
+            //        var embed = buildEmbed(data, message.author);
+            //        var richEmbed = new Discord.RichEmbed(embed);
+            //        message.channel.send("here ya go", { embed: richEmbed });
+            //    });
         } catch (e) {
             console.log(e)
         }
@@ -82,13 +92,13 @@ function buildEmbed(data, author) {
             },
             {
                 name: "Accuracy",
-                value: Math.round(accuracy).toString(),
+                value: `${Math.round(accuracy).toString()} %`,
                 inline: true
 
             },
             {
                 name: "% Kills With Headshot",
-                value: Math.round(hper),
+                value: `${Math.round(hper)} %`,
                 inline: true
             }
         ],

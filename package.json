@@ -2,22 +2,23 @@
   "name": "CSGO-Stats-Welcome-Bot",
   "version": "0.0.0",
   "description": "Discord welcome bot that provides CSGO stats for new users",
-    "main": "bot.js",
-    "author": {
-        "name": "sdorris"
-    },
+  "main": "bot.js",
+  "author": {
+    "name": "sdorris"
+  },
   "engines": {
     "node": "8.6.0"
   },
   "dependencies": {
+    "bufferutil": "^3.0.2",
     "csgostatsnode": "^1.1.1",
     "discord.js": "^11.2.1",
-    "bufferutil": "^3.0.2",
     "erlpack": "*",
+    "libsodium-wrappers": "0.5.4",
+    "node-fetch": "^1.7.3",
     "node-opus": "^0.2.6",
     "opusscript": "^0.0.3",
     "sodium": "^2.0.1",
-    "libsodium-wrappers": "0.5.4",
     "uws": "^0.14.5"
   }
 }

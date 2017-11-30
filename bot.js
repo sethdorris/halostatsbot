@@ -48,13 +48,13 @@ function buildEmbed(data, author) {
     var headshots = data.playerstats.stats[22].value;
     var kd = (kills / deaths).toFixed(2);
     var hours = data.playerstats.stats[2].value / 60 / 60;
-    var accuracy = (headshots / hits);
-    var hper = (headshots / shots);
+    var accuracy = (hits / shots);
+    var hper = (headshots / kills);
     console.log("shots", shots);
     console.log("hits", hits);
     console.log("headshots", headshots);
-    console.log("accuracy ", accuracy);
-    console.log("headshot % ", hper);
+    console.log("accuracy ", Math.round(accuracy));
+    console.log("headshot % ", Math.round(hper));
     return {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,
@@ -82,13 +82,13 @@ function buildEmbed(data, author) {
             },
             {
                 name: "Accuracy",
-                value: Math.round(hits / shots).toString(),
+                value: Math.round(accuracy).toString(),
                 inline: true
 
             },
             {
                 name: "% Kills With Headshot",
-                value: Math.round(headshots / kills),
+                value: Math.round(hper),
                 inline: true
             }
         ],

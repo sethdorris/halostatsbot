@@ -48,8 +48,8 @@ function buildEmbed(data, author) {
     var headshots = data.playerstats.stats[22].value;
     var kd = (kills / deaths).toFixed(2);
     var hours = data.playerstats.stats[2].value / 60 / 60;
-    var accuracy = (hits / shots);
-    var hper = (headshots / kills);
+    var accuracy = (hits / shots) * 100;
+    var hper = (headshots / kills) * 100;
     console.log("shots", shots);
     console.log("hits", hits);
     console.log("headshots", headshots);

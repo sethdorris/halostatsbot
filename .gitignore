@@ -46,3 +46,6 @@ build/config.*
 # Build Files & Miscellaneous
 heroku
 build/bundle.js.map
+
+
+keys.js

@@ -73,6 +73,6 @@ function buildEmbed(data, author) {
                 value: Math.round(hours).toString()                
             }
         ],
-        footer: "If you have ideas for additional stats let BruiseR- know!"
+        footer: { text : "If you have ideas for additional stats let BruiseR- know!"}
     }
 }

@@ -1,0 +1,13 @@
+{
+  "name": "CSGO-Stats-Welcome-Bot",
+  "version": "0.0.0",
+  "description": "Discord welcome bot that provides CSGO stats for new users",
+  "main": "bot.js",
+  "author": {
+    "name": "sdorris"
+  },
+  "dependencies": {
+    "csgostatsnode": "^1.1.1",
+    "discord.js": "^11.2.1"
+  }
+}

@@ -7,220 +7,172 @@ bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
 
 console.log(bot);
 
-var orgchart = {
-    title: "Organization Chart",
-    description: `Here is roster / org chart for Delta ESports`,
-    color: 0xf0df0f,
-    fields: [
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "Founder",
-            value: "BruiseR-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "Recruiting Director",
-            value: "Kristopher London",
-            inline: true
-        },
-        {
-            name: "Alpha Team",
-            value: "BruiseR-",
-            inline: true
+var org = {
+    chart: {
+        title: "CS GO Stats",
+        description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,
+        color: 0xf0df0f,
+        fields: [
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "Founder",
+                value: "BruiseR-",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "Recruiting Director",
+                value: "Kristopher London",
+                inline: true
+            },
+            {
+                name: "Alpha Team",
+                value: "BruiseR-",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "Open",
+                inline: true
+            },
+            {
+                name: "/a",
+                value: "/a",
+                inline: true
+            },
+            {
+                name: "Selection Candidates",
+                value: "Recruitment Status: Open",
+                inline: true
+            },
 
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Kristopher London",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Fatlijah",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Zumbie",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "Open",
-            inline: true
-        },
-        {
-            name: "-",
-            value: "-",
-            inline: true
-        },
-        {
-            name: "Selection Candidates",
-            value: "-",
-            inline: true
-        }
-    ]
-}
-var orgState = {
-    orgChart: orgchart,
-    rosterSlots: [7, 10, 13, 16, 19, 22, 25, 28, 31],
-    addMember: function (displayName) {
-        console.log(displayName);
-        this.orgChart.fields.forEach((field, index) => {
-            if (orgState.rosterSlots.indexOf(index) > -1) {
-                if (field.value == "Open") {
-                    field.value = displayName;
-                }
-            }
-        });
-        return this.orgChart;
+        ],
+        footer: { text: "If you have ideas for additional stats let BruiseR- know!" }
     },
-    removeMember: function(displayName) {
-        this.orgChart.fields.forEach((field, index) => {
-            if (rosterSlots.indexOf(index) > -1 && field.value == displayName) {
-                field.value = "Open";
+    openslots: [7, 10, 13, 16, 19, 22, 25],
+    addmember: function(displayname) {
+        this.chart.fields.forEach((field, index) => {
+            if (org.openslots.indexOf(index) > -1 && field.value == "Open") {
+                field.value = displayname;
             }
         });
-        return this.orgChat;
+        return this.chart;
+    },
+    removemember: function(displayname) {
+        this.chart.fields.forEach((fields, index) => {
+            if (org.openslots.indexOf(index) > -1 && fields.value == displayname) {
+                fields.value = "Open";
+            }
+        });
+        return this.chart;
     }
 }
 
@@ -252,27 +204,25 @@ bot.on('message', message => {
             console.log(e)
         }
     }
-
-    if (message.content.substring(0, 9) === "!orgchart") {
-        var splitMessage = message.content.substring(10).split(" ");
-        var action = splitMessage[0];
-        var embed;
-        //put check for if this command is sent from me
-        switch (action) {
-            case "addmember":
-                embed = orgState.addMember(message.mentions.members[0].displayName);
-                break;
-            case "removemember":
-                embed = orgState.removeMember(message.mentions.members[0].displayName);
-                break;
-        }
-        var richEmbed = new Discord.RichEmbed(embed);
-        message.channel.send("Here ya go", { embed: richEmbed });
+    if (message.content.substring(0, 9) === "!showorg") {
+        var embed = new Discord.RichEmbed(org.chart);
+        message.channel.send("here ya go", { embed: embed });
     }
 
-    if (message.content.substring(0, 15) === "!showorg") {
-        var embed = new Discord.RichEmbed(orgState.orgChart);
-        message.channel.send("Here ya go", { embed: embed });
+    if (message.content.substring(0, 4) === "!org") {
+        var action = message.content.substring(5).split(" ")[0];
+        switch (action) {
+            case "addmember":
+                var embed = org.addmember(message.mentions.members[0].diplayName);
+                var richEmbed = new Discord.RichEmbed(embed);
+                message.channel.send("new organization change", { embed: richEmbed });
+                break;
+            case "removemember":
+                var embed = org.removemember(message.mentions.members[0].displayName);
+                var richEmbed = new Discord.RichEmbed(embed);
+                message.channel.send("new organization change", { embed: richEmbed });
+                break;
+        }
     }
 });
 

@@ -17,8 +17,8 @@ var org = {
         color: 0xf0df0f,
         fields: [
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
@@ -27,8 +27,8 @@ var org = {
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
@@ -42,113 +42,113 @@ var org = {
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {
-                name: "\200",
+                name: "\200b",
                 value: "Open",
                 inline: true
             },
             {
-                name: "\200",
-                value: "\200",
+                name: "\200b",
+                value: "\200b",
                 inline: true
             },
             {

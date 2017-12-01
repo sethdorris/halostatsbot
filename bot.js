@@ -254,7 +254,7 @@ bot.on('message', message => {
     }
 
     if (message.content.substring(0, 9) === "!orgchart") {
-        var splitMessage = message.content.substring(9).split(" ");
+        var splitMessage = message.content.substring(10).split(" ");
         var action = splitMessage[0];
         var embed;
         //put check for if this command is sent from me
@@ -268,6 +268,11 @@ bot.on('message', message => {
         }
         var richEmbed = new Discord.RichEmbed(embed);
         message.channel.send("Here ya go", { embed: richEmbed });
+    }
+
+    if (message.content.substring(0, 15) === "!showorg") {
+        var embed = new Discord.RichEmbed(orgState.orgChart);
+        message.channel.send("Here ya go", { embed: embed });
     }
 });
 

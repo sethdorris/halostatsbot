@@ -9,8 +9,11 @@ console.log(bot);
 
 var org = {
     chart: {
-        title: "CS GO Stats",
-        description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,
+        title: "Organization Chart",
+        description: ``,
+        author: {
+            name: "Delta ESports"
+        },
         color: 0xf0df0f,
         fields: [
             {
@@ -152,7 +155,7 @@ var org = {
                 name: "Selection Candidates",
                 value: "Recruitment Status: Open",
                 inline: true
-            },
+            }
 
         ],
         footer: { text: "If you have ideas for additional stats let BruiseR- know!" }

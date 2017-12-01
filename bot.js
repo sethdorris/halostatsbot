@@ -256,16 +256,18 @@ bot.on('message', message => {
     if (message.content.substring(0, 9) === "!orgchart") {
         var splitMessage = message.content.substring(9).split(" ");
         var action = splitMessage[0];
-
+        var embed;
         //put check for if this command is sent from me
         switch (action) {
             case "addmember":
-                orgState.addMember(message.mentions.members[0].displayName);
+                embed = orgState.addMember(message.mentions.members[0].displayName);
                 break;
             case "removemember":
-                orgState.removeMember(message.mentions.members[0].displayName);
+                embed = orgState.removeMember(message.mentions.members[0].displayName);
                 break;
         }
+        var richEmbed = new Discord.RichEmbed(embed);
+        message.channel.send("Here ya go", { embed: richEmbed });
     }
 });
 

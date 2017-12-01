@@ -40,15 +40,21 @@ bot.on('message', message => {
 
 function buildEmbed(data, author) {
     console.log("data", data);
-    var kills = data.playerstats.stats[0].value;
-    var deaths = data.playerstats.stats[1].value;
-    var shots = data.playerstats.stats[42].value;
-    var hits = data.playerstats.stats[41].value;
-    var headshots = data.playerstats.stats[22].value;
-    var kd = (kills / deaths).toFixed(2);
-    var hours = data.playerstats.stats[2].value / 60 / 60;
-    var accuracy = (hits / shots) * 100;
-    var hper = (headshots / kills) * 100;
+    try {
+        var kills = data.playerstats.stats[0].value;
+        var deaths = data.playerstats.stats[1].value;
+        var shots = data.playerstats.stats[42].value;
+        var hits = data.playerstats.stats[41].value;
+        var headshots = data.playerstats.stats[22].value;
+        var kd = (kills / deaths).toFixed(2);
+        var hours = data.playerstats.stats[2].value / 60 / 60;
+        var accuracy = (hits / shots) * 100;
+        var hper = (headshots / kills) * 100;
+    } catch (e) {
+        return {
+            title: "Whoops can't read that ID"
+        }
+    }
     return {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,

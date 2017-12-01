@@ -7,13 +7,229 @@ bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
 
 console.log(bot);
 
+var orgchart = {
+    title: "Organization Chart",
+    description: `Here is roster / org chart for Delta ESports`,
+    color: 0xf0df0f,
+    fields: [
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: "Founder",
+            value: "BruiseR-",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: "Recruiting Director",
+            value: "Kristopher London",
+            inline: true
+        },
+        {
+            name: "Alpha Team",
+            value: "BruiseR-",
+            inline: true
+
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Kristopher London",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Fatlijah",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Zumbie",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: " ",
+            value: "Open",
+            inline: true
+        },
+        {
+            name: " ",
+            value: " ",
+            inline: true
+        },
+        {
+            name: "Selection Candidates",
+            value: " ",
+            inline: true
+        }
+    ]
+}
+var orgState = {
+    orgChart: orgchart,
+    rosterSlots: [7, 10, 13, 16, 19, 22, 25, 28, 31],
+    addMember: function (displayName) {
+        console.log(displayName);
+        this.orgChart.fields.forEach((field, index) => {
+            if (orgState.rosterSlots.indexOf(index) > -1) {
+                if (field.value == "Open") {
+                    field.value = displayName;
+                }
+            }
+        });
+        return this.orgChart;
+    },
+    removeMember: function(displayName) {
+        this.orgChart.fields.forEach((field, index) => {
+            if (rosterSlots.indexOf(index) > -1 && field.value == displayName) {
+                field.value = "Open";
+            }
+        });
+        return this.orgChat;
+    }
+}
+
 bot.on("ready", () => {
     console.log("bot is operational");
 });
 
 bot.on("guildMemberAdd", member => {
     var role = member.guild.roles.find("name", "Visitor");
-    console.log(role);
     member.addRole(role).catch(err => console.log(err));
 });
 
@@ -34,6 +250,21 @@ bot.on('message', message => {
                 });
         } catch (e) {
             console.log(e)
+        }
+    }
+
+    if (message.content.substring(0, 9) === "!orgchart") {
+        var splitMessage = message.content.substring(9).split(" ");
+        var action = splitMessage[0];
+
+        //put check for if this command is sent from me
+        switch (action) {
+            case "addmember":
+                orgState.addMember(message.mentions.members[0].displayName);
+                break;
+            case "removemember":
+                orgState.removeMember(message.mentions.members[0].displayName);
+                break;
         }
     }
 });

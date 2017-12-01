@@ -64,7 +64,7 @@ var orgchart = {
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Fatlijah",
             inline: true
         },

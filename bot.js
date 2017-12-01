@@ -186,6 +186,8 @@ bot.on("guildMemberAdd", member => {
 });
 
 bot.on('message', message => {
+    var embed;
+    var richEmbed;
     // If the message is "ping"
     if (message.content === 'ping') {
     // Send "pong" to the same channel
@@ -196,8 +198,8 @@ bot.on('message', message => {
         try {
             stats.getStats(sid,
                 data => {
-                    var embed = buildEmbed(data, message.author);
-                    var richEmbed = new Discord.RichEmbed(embed);
+                    embed = buildEmbed(data, message.author);
+                    richEmbed = new Discord.RichEmbed(embed);
                     message.channel.send("here ya go", { embed: richEmbed });
                 });
         } catch (e) {
@@ -205,7 +207,7 @@ bot.on('message', message => {
         }
     }
     if (message.content.substring(0, 9) === "!showorg") {
-        var embed = new Discord.RichEmbed(org.chart);
+        embed = new Discord.RichEmbed(org.chart);
         message.channel.send("here ya go", { embed: embed });
     }
 
@@ -213,13 +215,13 @@ bot.on('message', message => {
         var action = message.content.substring(5).split(" ")[0];
         switch (action) {
             case "addmember":
-                var embed = org.addmember(message.mentions.members[0].diplayName);
-                var richEmbed = new Discord.RichEmbed(embed);
+                embed = org.addmember(message.mentions.members[0].diplayName);
+                richEmbed = new Discord.RichEmbed(embed);
                 message.channel.send("new organization change", { embed: richEmbed });
                 break;
             case "removemember":
-                var embed = org.removemember(message.mentions.members[0].displayName);
-                var richEmbed = new Discord.RichEmbed(embed);
+                embed = org.removemember(message.mentions.members[0].displayName);
+                richEmbed = new Discord.RichEmbed(embed);
                 message.channel.send("new organization change", { embed: richEmbed });
                 break;
         }

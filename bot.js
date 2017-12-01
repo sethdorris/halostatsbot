@@ -17,8 +17,8 @@ var org = {
         color: 0xf0df0f,
         fields: [
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
@@ -27,8 +27,8 @@ var org = {
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
@@ -42,113 +42,113 @@ var org = {
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
-                name: "/a",
+                name: "\a",
                 value: "Open",
                 inline: true
             },
             {
-                name: "/a",
-                value: "/a",
+                name: "\a",
+                value: "\a",
                 inline: true
             },
             {
@@ -157,8 +157,7 @@ var org = {
                 inline: true
             }
 
-        ],
-        footer: { text: "If you have ideas for additional stats let BruiseR- know!" }
+        ]
     },
     openslots: [7, 10, 13, 16, 19, 22, 25],
     addmember: function(displayname) {
@@ -232,6 +231,7 @@ bot.on('message', message => {
 });
 
 function buildEmbed(data, author) {
+    console.log("data", data);
     var kills = data.playerstats.stats[0].value;
     var deaths = data.playerstats.stats[1].value;
     var shots = data.playerstats.stats[42].value;

@@ -13,8 +13,8 @@ var orgchart = {
     color: 0xf0df0f,
     fields: [
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
@@ -23,8 +23,8 @@ var orgchart = {
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
@@ -39,28 +39,28 @@ var orgchart = {
 
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Kristopher London",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
@@ -69,133 +69,133 @@ var orgchart = {
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Zumbie",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
-            name: " ",
+            name: "-",
             value: "Open",
             inline: true
         },
         {
-            name: " ",
-            value: " ",
+            name: "-",
+            value: "-",
             inline: true
         },
         {
             name: "Selection Candidates",
-            value: " ",
+            value: "-",
             inline: true
         }
     ]

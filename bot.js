@@ -42,7 +42,7 @@ bot.on('message', message => {
       console.log(role)
       message.member.addRole(role).catch(err => console.log(err))
       //return message
-      message.channel.send("Thanks for appling! Our recruiting director will be in touch to schedule a try out soon.")
+      message.channel.send("Thanks for applying! Our recruiting director will be in touch to schedule a try out soon.")
     }
 });
 

@@ -36,6 +36,11 @@ bot.on('message', message => {
             console.log(e)
         }
     }
+
+    if (message.content.substring(0, 6) === "!apply") {
+      var role = message.member.guild.roles.find("name", "candidate");
+      message.member.addRole(role).catch(err => console.log(err))
+    }
 });
 
 function buildEmbed(data, author) {
@@ -78,7 +83,7 @@ function buildEmbed(data, author) {
             {
                 name: "Hours Played",
                 value: Math.round(hours).toString(),
-                inline: true               
+                inline: true
             },
             {
                 name: "Accuracy",

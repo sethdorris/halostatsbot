@@ -39,6 +39,7 @@ bot.on('message', message => {
 
     if (message.content.substring(0, 6) === "!apply") {
       var role = message.member.guild.roles.find("name", "candidate");
+      console.log(role)
       message.member.addRole(role).catch(err => console.log(err))
     }
 });

@@ -41,6 +41,8 @@ bot.on('message', message => {
       var role = message.member.guild.roles.find("name", "Candidate");
       console.log(role)
       message.member.addRole(role).catch(err => console.log(err))
+      //return message
+      message.channel.send("Thanks for appling! Our recruiting director will be in touch to schedule a try out soon.")
     }
 });
 

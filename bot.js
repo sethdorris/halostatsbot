@@ -14,7 +14,7 @@ bot.on("guildMemberAdd", member => {
     var role = member.guild.roles.find("name", "Visitor");
     member.addRole(role).catch(err => console.log(err));
     var channel = member.guild.channels.find('name', 'general');
-    channel.send(`Welcome to CSGO Team - Divine's Discord Channel ${member}. If you want to apply to join simply type !apply.`)
+    channel.send(`Welcome to Team Slyfox's Discord Channel ${member}. If you want to apply to join simply type !apply.`)
 });
 
 bot.on('message', message => {

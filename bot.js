@@ -42,9 +42,9 @@ bot.on('message', message => {
     if (message.content.substring(0, 6) === "!apply") {
       var role = message.member.guild.roles.find("name", "Candidate");
       console.log(role)
-      message.member.addRole(role).catch(err => console.log(err))
+        message.member.addRole(role).catch(err => console.log(err));
       //return message
-      message.channel.send("Thanks for applying! Our recruiting director will be in touch to schedule a try out soon.")
+        message.channel.send("Thanks for applying! A member of the staff will meet with you as soon as possible.");
     }
 });
 

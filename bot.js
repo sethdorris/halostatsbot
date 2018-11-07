@@ -14,7 +14,7 @@ bot.on("guildMemberAdd", member => {
     var role = member.guild.roles.find("name", "Visitor");
     member.addRole(role).catch(err => console.log(err));
     var channel = member.guild.channels.find('name', 'general');
-    channel.send(`Welcome to Team Slyfox's Discord Channel ${member}. If you want to apply to join simply type !apply.`)
+    channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. If you want to register as a Free Agent for the current season simply type !apply.`)
 });
 
 bot.on('message', message => {
@@ -42,9 +42,10 @@ bot.on('message', message => {
     if (message.content.substring(0, 6) === "!apply") {
       var role = message.member.guild.roles.find("name", "Candidate");
       console.log(role)
-        message.member.addRole(role).catch(err => console.log(err));
+      message.member.addRole(role).catch(err => console.log(err));
+      message.member.haloStats = { kills: 24, deaths: 5 };
       //return message
-        message.channel.send("Thanks for applying! A member of the staff will meet with you as soon as possible.");
+      message.channel.send(`Thanks for applying! A member of the staff will meet with you as soon as possible. You have ${message.member.haloStats.kills} kills in Halo!`);
     }
 });
 

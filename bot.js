@@ -35,7 +35,6 @@ bot.on('message', message => {
                 data => {
                     embed = buildEmbed(data, message.author);
                     richEmbed = new Discord.RichEmbed(embed);
-                    richEmbed.setAuthor()
                     message.channel.send("here ya go", { embed: richEmbed });
                 });
         } catch (e) {
@@ -107,10 +106,8 @@ function buildEmbed(data, author) {
             title: "Whoops something went wrong!"
         }
     }
-    console.log("author", author)
-    console.log("authorImage", authorImage)
     return {
-        title: "CS GO Stats",
+        title: "Halo 5 Stats",
         description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Results[0].Id}`,
         color: 0xf0df0f,
         author: {

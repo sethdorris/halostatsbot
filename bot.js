@@ -107,6 +107,8 @@ function buildEmbed(data, author) {
             title: "Whoops something went wrong!"
         }
     }
+    console.log("author", author)
+    console.log("authorImage", authorImage)
     return {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Results[0].Id}`,

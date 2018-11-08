@@ -29,8 +29,11 @@ bot.on('message', message => {
         var gamertag = message.content.substring(7);
         var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${gamertag}`;
         try {
-            fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } }).then(
+            fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
+                .then(res => res.json())
+                .then(
                 data => {
+                    
                     embed = buildEmbed(data, message.author);
                     richEmbed = new Discord.RichEmbed(embed);
                     message.channel.send("here ya go", { embed: richEmbed });

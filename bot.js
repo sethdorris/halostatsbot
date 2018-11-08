@@ -87,7 +87,7 @@ function buildEmbed(data, author) {
             }
             highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
         } else {
-            csr = "No CSR data available."
+            highestCsr = "No CSR data available."
         }
         //var shots = data.playerstats.stats[42].value;
         //var hits = data.playerstats.stats[41].value;

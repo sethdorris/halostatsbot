@@ -54,10 +54,10 @@ bot.on('message', message => {
 function buildEmbed(data, author) {
     console.log("data", data);
     try {
-        var kills = data.Result.ArenaStats.TotalKills;
-        var deaths = data.Result.ArenaStats.TotalDeaths;
+        var kills = data.Result[0].ArenaStats.TotalKills;
+        var deaths = data.Result[0].ArenaStats.TotalDeaths;
         var csr;
-        switch (data.Result.ArenaStats.HighestCsrAttained.DesignationId) {
+        switch (data.Result[0].ArenaStats.HighestCsrAttained.DesignationId) {
             case 0:
                 csr = "Unranked";
                 break;
@@ -83,7 +83,7 @@ function buildEmbed(data, author) {
                 csr = "Champion"
                 break;
         }
-        var highestCsr = `${csr} ${data.Result.ArenaStats.HighestCsrAttained.Tier}`
+        var highestCsr = `${csr} ${data.Result[0].ArenaStats.HighestCsrAttained.Tier}`
         //var shots = data.playerstats.stats[42].value;
         //var hits = data.playerstats.stats[41].value;
         //var headshots = data.playerstats.stats[22].value;

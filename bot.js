@@ -114,7 +114,7 @@ function buildEmbed(data, author) {
         description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Results[0].Id}`,
         color: 0xf0df0f,
         author: {
-            name: author,
+            name: data.Results[0].Id,
             icon_url: authorImage
         },
         fields: [

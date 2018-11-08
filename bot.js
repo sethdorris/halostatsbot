@@ -1,7 +1,7 @@
 var Discord = require('discord.js');
-//STEAM API KEY 61862B8B86AADC4D73B2A69E5CE28D3D
-var csgoStats = require('csgostatsnode');
-var stats = new csgoStats({ "apikey": "61862B8B86AADC4D73B2A69E5CE28D3D" });
+const haloApiKey = "0820ab16b84e419db0d34dcda8fc91c3";
+var fetch = require("node-fetch");
+
 var bot = new Discord.Client();
 bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
 
@@ -26,9 +26,10 @@ bot.on('message', message => {
       message.channel.send('pong');
     }
     if (message.content.substring(0, 6) === "!stats") {
-        var sid = message.content.substring(7);
+        var gamertag = message.content.substring(7);
+        var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${gamertag}`;
         try {
-            stats.getStats(sid,
+            fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } }).then(
                 data => {
                     embed = buildEmbed(data, message.author);
                     richEmbed = new Discord.RichEmbed(embed);
@@ -52,23 +53,51 @@ bot.on('message', message => {
 function buildEmbed(data, author) {
     console.log("data", data);
     try {
-        var kills = data.playerstats.stats[0].value;
-        var deaths = data.playerstats.stats[1].value;
-        var shots = data.playerstats.stats[42].value;
-        var hits = data.playerstats.stats[41].value;
-        var headshots = data.playerstats.stats[22].value;
+        var kills = data.ArenaStats.TotalKills;
+        var deaths = data.ArenaStats.TotalDeaths;
+        var csr;
+        switch (data.ArenaStats.HighestCsrAttained.DesignationId) {
+            case 0:
+                csr = "Unranked";
+                break;
+            case 1:
+                csr = "Bronze";
+                break;
+            case 2:
+                csr = "Silver";
+                break;
+            case 3:
+                csr = "Gold";
+                break;
+            case 4:
+                csr = "Platinum";
+                break;
+            case 5:
+                csr = "Diamond";
+                break;
+            case 6:
+                csr = "Onyx";
+                break;
+            case 7:
+                csr = "Champion"
+                break;
+        }
+        var highestCsr = `${csr} ${data.ArenaStats.HighestCsrAttained.Tier}`
+        //var shots = data.playerstats.stats[42].value;
+        //var hits = data.playerstats.stats[41].value;
+        //var headshots = data.playerstats.stats[22].value;
         var kd = (kills / deaths).toFixed(2);
-        var hours = data.playerstats.stats[2].value / 60 / 60;
-        var accuracy = (hits / shots) * 100;
-        var hper = (headshots / kills) * 100;
+        //var hours = data.playerstats.stats[2].value / 60 / 60;
+        //var accuracy = (hits / shots) * 100;
+        //var hper = (headshots / kills) * 100;
     } catch (e) {
         return {
-            title: "Whoops can't read that ID"
+            title: "Whoops can't find stats on that Gamertag"
         }
     }
     return {
         title: "CS GO Stats",
-        description: `Here is the stats ${author} requested for Steam ID: ${data.playerstats.steamID}`,
+        description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Id}`,
         color: 0xf0df0f,
         fields: [
             {
@@ -87,19 +116,8 @@ function buildEmbed(data, author) {
                 inline: true
             },
             {
-                name: "Hours Played",
-                value: Math.round(hours).toString(),
-                inline: true
-            },
-            {
-                name: "Accuracy",
-                value: `${Math.round(accuracy).toString()} %`,
-                inline: true
-
-            },
-            {
-                name: "% Kills With Headshot",
-                value: `${Math.round(hper)} %`,
+                name: "Highest CSR",
+                value: highestCsr.toString(),
                 inline: true
             }
         ],

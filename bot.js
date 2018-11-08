@@ -57,33 +57,38 @@ function buildEmbed(data, author) {
         var kills = data.Results[0].Result.ArenaStats.TotalKills;
         var deaths = data.Results[0].Result.ArenaStats.TotalDeaths;
         var csr;
-        switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
-            case 0:
-                csr = "Unranked";
-                break;
-            case 1:
-                csr = "Bronze";
-                break;
-            case 2:
-                csr = "Silver";
-                break;
-            case 3:
-                csr = "Gold";
-                break;
-            case 4:
-                csr = "Platinum";
-                break;
-            case 5:
-                csr = "Diamond";
-                break;
-            case 6:
-                csr = "Onyx";
-                break;
-            case 7:
-                csr = "Champion"
-                break;
+        var highestCsr;
+        if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
+            switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
+                case 0:
+                    csr = "Unranked";
+                    break;
+                case 1:
+                    csr = "Bronze";
+                    break;
+                case 2:
+                    csr = "Silver";
+                    break;
+                case 3:
+                    csr = "Gold";
+                    break;
+                case 4:
+                    csr = "Platinum";
+                    break;
+                case 5:
+                    csr = "Diamond";
+                    break;
+                case 6:
+                    csr = "Onyx";
+                    break;
+                case 7:
+                    csr = "Champion"
+                    break;
+            }
+            highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+        } else {
+            csr = "No CSR data available."
         }
-        var highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
         //var shots = data.playerstats.stats[42].value;
         //var hits = data.playerstats.stats[41].value;
         //var headshots = data.playerstats.stats[22].value;

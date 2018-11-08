@@ -99,7 +99,7 @@ function buildEmbed(data, author) {
     }
     return {
         title: "CS GO Stats",
-        description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Id}`,
+        description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Results[0].Id}`,
         color: 0xf0df0f,
         fields: [
             {

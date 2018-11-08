@@ -35,6 +35,7 @@ bot.on('message', message => {
                 data => {
                     embed = buildEmbed(data, message.author);
                     richEmbed = new Discord.RichEmbed(embed);
+                    richEmbed.setAuthor()
                     message.channel.send("here ya go", { embed: richEmbed });
                 });
         } catch (e) {
@@ -58,10 +59,12 @@ function buildEmbed(data, author) {
         var deaths = data.Results[0].Result.ArenaStats.TotalDeaths;
         var csr;
         var highestCsr;
+        var authorImage;
         if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
             switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
                 case 0:
                     csr = "Unranked";
+                    authorImage = "https://content.halocdn.com/media/Default/games/halo-5-guardians/csr/unranked_00-61fca949c33f433ba7e7507d97ff130f.png";
                     break;
                 case 1:
                     csr = "Bronze";
@@ -74,6 +77,7 @@ function buildEmbed(data, author) {
                     break;
                 case 4:
                     csr = "Platinum";
+                    authorImage = "https://content.halocdn.com/media/Default/games/halo-5-guardians/csr/csr_platinum_array01-c8df3dc366ea49209762f9b08189ffa6.png";
                     break;
                 case 5:
                     csr = "Diamond";
@@ -87,7 +91,8 @@ function buildEmbed(data, author) {
             }
             highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
         } else {
-            highestCsr = "No CSR data available."
+            highestCsr = "No CSR data available.";
+            authorImage = "";
         }
         //var shots = data.playerstats.stats[42].value;
         //var hits = data.playerstats.stats[41].value;
@@ -106,6 +111,10 @@ function buildEmbed(data, author) {
         title: "CS GO Stats",
         description: `Here is the stats ${author} requested for XBL Gamertag: ${data.Results[0].Id}`,
         color: 0xf0df0f,
+        author: {
+            name: author,
+            icon_url: authorImage
+        },
         fields: [
             {
                 name: "Kills",

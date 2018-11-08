@@ -33,8 +33,7 @@ bot.on('message', message => {
                 .then(res => res.json())
                 .then(
                 data => {
-                    
-                    embed = buildEmbed(data.Result, message.author);
+                    embed = buildEmbed(data, message.author);
                     richEmbed = new Discord.RichEmbed(embed);
                     message.channel.send("here ya go", { embed: richEmbed });
                 });
@@ -56,10 +55,10 @@ bot.on('message', message => {
 function buildEmbed(data, author) {
     console.log("data", data);
     try {
-        var kills = data.ArenaStats.TotalKills;
-        var deaths = data.ArenaStats.TotalDeaths;
+        var kills = data.Result.ArenaStats.TotalKills;
+        var deaths = data.Result.ArenaStats.TotalDeaths;
         var csr;
-        switch (data.ArenaStats.HighestCsrAttained.DesignationId) {
+        switch (data.Result.ArenaStats.HighestCsrAttained.DesignationId) {
             case 0:
                 csr = "Unranked";
                 break;
@@ -85,7 +84,7 @@ function buildEmbed(data, author) {
                 csr = "Champion"
                 break;
         }
-        var highestCsr = `${csr} ${data.ArenaStats.HighestCsrAttained.Tier}`
+        var highestCsr = `${csr} ${data.Result.ArenaStats.HighestCsrAttained.Tier}`
         //var shots = data.playerstats.stats[42].value;
         //var hits = data.playerstats.stats[41].value;
         //var headshots = data.playerstats.stats[22].value;

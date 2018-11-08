@@ -46,7 +46,6 @@ bot.on('message', message => {
       var role = message.member.guild.roles.find("name", "Candidate");
       console.log(role)
       message.member.addRole(role).catch(err => console.log(err));
-      message.member.haloStats = { kills: 24, deaths: 5 };
       //return message
       message.channel.send(`Thanks for applying! A member of the staff will meet with you as soon as possible. You have ${message.member.haloStats.kills} kills in Halo!`);
     }
@@ -93,8 +92,9 @@ function buildEmbed(data, author) {
         //var accuracy = (hits / shots) * 100;
         //var hper = (headshots / kills) * 100;
     } catch (e) {
+        console.log("This is what sucked", e)
         return {
-            title: "Whoops can't find stats on that Gamertag"
+            title: "Whoops something went wrong!"
         }
     }
     return {

@@ -34,7 +34,7 @@ bot.on('message', message => {
                 .then(
                 data => {
                     
-                    embed = buildEmbed(data, message.author);
+                    embed = buildEmbed(data.Result, message.author);
                     richEmbed = new Discord.RichEmbed(embed);
                     message.channel.send("here ya go", { embed: richEmbed });
                 });

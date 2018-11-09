@@ -22,6 +22,8 @@ bot.on("guildMemberAdd", async member => {
             channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
         } else {
             channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
+            var role = member.guild.roles.find("name", "Linked");
+            member.addRole(role).catch(err => console.log(err));
         }
     } catch (e) {
         console.log("Member add error", e);

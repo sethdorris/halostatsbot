@@ -1,30 +1,38 @@
 var Discord = require('discord.js');
 const haloApiKey = "0820ab16b84e419db0d34dcda8fc91c3";
 var fetch = require("node-fetch");
-
+var dbconfig = require("./dbconfig");
 var bot = new Discord.Client();
+var pg = require("pg");
+const pool = new pg.Pool(dbconfig.development);
 bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
 
-console.log(bot);
 bot.on("ready", () => {
     console.log("bot is operational");
 });
 
-bot.on("guildMemberAdd", member => {
-    var role = member.guild.roles.find("name", "Visitor");
-    member.addRole(role).catch(err => console.log(err));
+bot.on("guildMemberAdd", async member => {
+    //look up to see if the user has a linked gamertag
     var channel = member.guild.channels.find('name', 'general');
-    channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. If you want to register as a Free Agent for the current season simply type \`!apply\`.`)
+    try {
+        var sql = `SELECT * FROM users WHERE discord_id = $1`;
+        var user = await pool.query(sql, [member.id]);
+        var channel = member.guild.channels.find('name', 'general');
+        if (user.rowCount < 1) {
+            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
+        } else {
+            channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
+        }
+    } catch (e) {
+        console.log("Member add error", e);
+        channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
+    }
 });
 
-bot.on('message', message => {
+bot.on('message', async message => {
     var embed;
     var richEmbed;
-    // If the message is "ping"
-    if (message.content === 'ping') {
-    // Send "pong" to the same channel
-      message.channel.send('pong');
-    }
+
     if (message.content.substring(0, 6) === "!stats") {
         var gamertag = message.content.substring(7);
         var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${gamertag}`;
@@ -42,12 +50,19 @@ bot.on('message', message => {
         }
     }
 
-    if (message.content.substring(0, 6) === "!apply") {
-      var role = message.member.guild.roles.find("name", "Candidate");
-      console.log(role)
-      message.member.addRole(role).catch(err => console.log(err));
-      //return message
-      message.channel.send(`Thanks for applying! A member of the staff will meet with you as soon as possible. You have ${message.member.haloStats.kills} kills in Halo!`);
+    if (message.content.substring(0, 7) === "!linkgt") {
+        var gamertag = message.content.substring(8);
+        var discordId = message.author.id;
+        try {
+            var sql = `INSERT INTO users (discord_id, gamertag) VALUES ($1, $2)`;
+            var createdUser = pool.query(sql, [discordId, gamertag]);
+            var role = message.member.guild.roles.find("name", "Linked");
+            message.member.addRole(role).catch(err => console.log(err));
+            message.channel.send("Thanks, your gamertag has now been linked to your discord.");
+        } catch (e) {
+            console.log("Error saving gamertag ", e);
+            message.channel.send("Sorry, something went wrong linking that gamertag.");
+        }
     }
 });
 

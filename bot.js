@@ -70,7 +70,7 @@ bot.on('message', async message => {
             var user = message.mentions.members.first();
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             console.log("User Id", user.id)
-            var result = pool.query(sql, [`'${user.id]'`);
+            var result = pool.query(sql, [`'${user.id}'`]);
             if (result.rowCount > 0) {
                 message.channel.send(`${user.displayName}'s gamertag is: ${result.rows[0].gamertag}`)
             } else {

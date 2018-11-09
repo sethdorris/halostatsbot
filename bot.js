@@ -71,6 +71,7 @@ bot.on('message', async message => {
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             console.log("User Id", user.id)
             var result = pool.query(sql, [`'${user.id}'`]);
+            console.log(result)
             if (result.rowCount > 0) {
                 message.channel.send(`${user.displayName}'s gamertag is: ${result.rows[0].gamertag}`)
             } else {

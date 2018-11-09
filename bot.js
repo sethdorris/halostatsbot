@@ -64,6 +64,22 @@ bot.on('message', async message => {
             message.channel.send("Sorry, something went wrong linking that gamertag.");
         }
     }
+
+    if (message.content.substring(0, 7) === "!showgt") {
+        try {
+            var user = message.mentions.members.first();
+            var sql = `SELECT * FROM users WHERE discord_id = $1`;
+            var result = pool.query(sql, [user.id]);
+            if (result.rowCount > 0) {
+                message.channel.send(`${user.displayName}'s gamertag is: ${result.rows[0].gamertag}`)
+            } else {
+                message.channel.send(`${user.displayName}'s gamertag could not be found. Ensure you're requesting a gamertag for a linked account.`)
+            }
+        } catch (e) {
+            console.log(e);
+            message.channel.send("Whoops something went wrong.")
+        }
+    }
 });
 
 function buildEmbed(data, author) {

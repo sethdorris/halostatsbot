@@ -68,6 +68,7 @@ bot.on('message', async message => {
     if (message.content.substring(0, 7) === "!showgt") {
         try {
             var user = message.mentions.members.first();
+            console.log("user", user);
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             var result = pool.query(sql, [user.id]);
             if (result.rowCount > 0) {

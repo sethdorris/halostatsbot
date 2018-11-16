@@ -122,7 +122,7 @@ bot.on('message', async message => {
         return {
             "title": "Help Commands",
             "description": "A list of helpful commands from the HDL Bot.",
-            "color": 10190921,
+            "color": 54271,
             "author": {
                 "name": "Halo Draft Bot",
                 "url": "https://discordapp.com",

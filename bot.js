@@ -102,7 +102,7 @@ bot.on('message', async message => {
         }
     }
     
-    if (message.content.substring(0, 16) === "!registeredcount") {
+    if (message.content.substring(0, 12) === "!leaguecount") {
         var sql = `SELECT * FROM users WHERE registered = true`;
         try {
             var total = await pool.query(sql);

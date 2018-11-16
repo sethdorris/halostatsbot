@@ -111,7 +111,47 @@ bot.on('message', async message => {
             message.channel.send("Whoops something went wrong. Someone slap BruiseR-!");
         }
     }
+
+    if (message.content.substring(0, 5) === "!help") {
+        var embedObj = buildHelpEmbed();
+        message.channel.send("Bot Help", { embedObj })
+    }
 });
+
+    function buildHelpEmbed() {
+        return {
+            "title": "Help Commands",
+            "description": "A list of helpful commands from the HDL Bot.",
+            "color": 10190921,
+            "author": {
+                "name": "Halo Draft Bot",
+                "url": "https://discordapp.com",
+                "icon_url": "https://cdn.discordapp.com/embed/avatars/0.png"
+            },
+            "fields": [
+              {
+                  "name": "`!linkgt yourtaghere`",
+                  "value": "Links your gamertag to your discord account."
+              },
+              {
+                  "name": "`!stats gamertaghere`",
+                  "value": "Retrieves a users halo 5 stats."
+              },
+              {
+                  "name": "`!showgt @user`",
+                  "value": "Retrieves a users gamertag if it is linked to their discord."
+              },
+              {
+                  "name": "`!register`",
+                  "value": "Registers you as a participant in the halo draft league!"
+              },
+              {
+                  "name": "`!leaguecount`",
+                  "value": "Shows total number of registered league participants"
+              }
+            ]
+        };
+    }
 
 function buildEmbed(data, author) {
     console.log("data", data);

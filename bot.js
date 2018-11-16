@@ -88,7 +88,7 @@ bot.on('message', async message => {
     if (message.content.substring(0, 9) === "!register") {
         var role = message.member.guild.roles.find("name", "League Competitor");
         try {
-            message.author.addRole(role);
+            message.member.addRole(role);
             message.channel.send("You are now a registered competitor for the Halo Draft League!")
         } catch (e) {
             message.channel.send("Something went wrong, you were not successfully registered.")

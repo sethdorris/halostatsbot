@@ -112,6 +112,18 @@ bot.on('message', async message => {
         }
     }
 
+    if (message.content.substring(0, 11) === "!quitleague") {
+        var user = message.member;
+        try {
+            var sql = `UPDATE users SET registered = false WHERE discord_id = $1`;
+            var removed = await pool.query(sql, [user.id]);
+            var role = message.member.guild.roles.find("name", "League Competitor");
+            message.member.removeRole(role);
+        } catch (e) {
+            message.channel.send("Someone kick BruiseR-. He messed up the bot again.")
+        }
+    }
+
     if (message.content.substring(0, 5) === "!help") {
         var embedObj = buildHelpEmbed();
         message.channel.send("Bot Help", { embed: embedObj })
@@ -148,6 +160,10 @@ bot.on('message', async message => {
               {
                   "name": "`!leaguecount`",
                   "value": "Shows total number of registered league participants"
+              },
+              {
+                  "name": "`!quitleague`",
+                  "value": "Remove yourself as a participant from the league."
               }
             ]
         };

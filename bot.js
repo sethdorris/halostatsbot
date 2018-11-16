@@ -119,6 +119,7 @@ bot.on('message', async message => {
             var removed = await pool.query(sql, [user.id]);
             var role = message.member.guild.roles.find("name", "League Competitor");
             message.member.removeRole(role);
+            message.channel.send("Aww. Sorry to see you go! I removed you from the league.")
         } catch (e) {
             message.channel.send("Someone kick BruiseR-. He messed up the bot again.")
         }

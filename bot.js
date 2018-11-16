@@ -98,6 +98,16 @@ bot.on('message', async message => {
             message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
         }
     }
+    
+    if (message.content.substring(0, 16) === "!registeredcount") {
+        var sql = `SELECT * FROM users WHERE registered = true`;
+        try {
+            var total = await pool.query(sql);
+            message.channel.send(`There are ${total.rowCount} registered participants for the upcoming league!`)
+        } catch (e) {
+            message.channel.send("Whoops something went wrong. Someone slap BruiseR-!");
+        }
+    }
 });
 
 function buildEmbed(data, author) {

@@ -92,6 +92,9 @@ bot.on('message', async message => {
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             var result = await pool.query(sql, [user.id]);
             if (result.rowCount < 1) { throw new Error("You must link your gamertag first.")}
+            var sql2 = `UPDATE users SET registered = true WHERE discord_id = $1`;
+            var result2 = await pool.query(sql2, [user.id]);
+            if (result2.rowCount < 1) { throw new Error("Kick BruiseR!")}
             message.member.addRole(role);
             message.channel.send("You are now a registered competitor for the Halo Draft League!")
         } catch (e) {

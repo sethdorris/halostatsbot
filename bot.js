@@ -88,10 +88,14 @@ bot.on('message', async message => {
     if (message.content.substring(0, 9) === "!register") {
         var role = message.member.guild.roles.find("name", "League Competitor");
         try {
+            var user = message.member;
+            var sql = `SELECT * FROM users WHERE discord_id = $1`;
+            var result = await pool.query(sql, [user.id]);
+            if (result.rowCount < 1) { throw new Error("You must link your gamertag first.")}
             message.member.addRole(role);
             message.channel.send("You are now a registered competitor for the Halo Draft League!")
         } catch (e) {
-            message.channel.send("Something went wrong, you were not successfully registered.")
+            message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
         }
     }
 });

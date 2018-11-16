@@ -114,7 +114,7 @@ bot.on('message', async message => {
 
     if (message.content.substring(0, 5) === "!help") {
         var embedObj = buildHelpEmbed();
-        message.channel.send("Bot Help", { embedObj })
+        message.channel.send("Bot Help", { embed: embedObj })
     }
 });
 

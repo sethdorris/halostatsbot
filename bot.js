@@ -84,6 +84,11 @@ bot.on('message', async message => {
             message.channel.send("Whoops something went wrong.")
         }
     }
+
+    if (message.content.substring(0, 9) === "!register") {
+        var role = message.author.guild.roles.find("name", "League Competitor");
+        message.author.addRole(role);
+    }
 });
 
 function buildEmbed(data, author) {

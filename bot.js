@@ -195,7 +195,7 @@ function buildEmbed(data, author) {
         var deaths = data.Results[0].Result.ArenaStats.TotalDeaths;
         var shots = data.Results[0].Result.ArenaStats.TotalShotsFired;
         var landed = data.Results[0].Result.ArenaStats.TotalShotsLanded;
-        var accuracy = (shots/landed).toFixed(2);
+        var accuracy = ((landed/shots)*100).toFixed(2);
         var csr;
         var highestCsr;
         var authorImage;

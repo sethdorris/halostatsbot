@@ -70,7 +70,7 @@ bot.on('message', async message => {
     if (message.content.substring(0, 9) === "!removegt") {
         try {
             var discordId = message.author.id;
-            var sql = `UPDATE users SET gamertag = null WHERE discord_id = $1`;
+            var sql = `DELETE FROM users WHERE discord_id = $1`;
             var removed = await pool.query(sql, [discordId]);
             var role = message.member.guild.roles.find("name", "Linked");
             message.member.removeRole(role).catch(err => console.log(err));

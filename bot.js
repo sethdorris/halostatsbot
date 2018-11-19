@@ -278,7 +278,7 @@ function buildEmbed(data, author) {
             {
                 name: "Accuracy",
                 value: accuracy,
-                inline: true;
+                inline: true
             }
         ],
         footer: { text : "If you have ideas for additional stats let BruiseR- know!"}

@@ -179,6 +179,10 @@ bot.on('message', async message => {
               {
                   "name": "`!quitleague`",
                   "value": "Remove yourself as a participant from the league."
+              },
+              {
+                  "name": "`!removegt`",
+                  "value": "Removes the linked gamertag to your discord account."
               }
             ]
         };

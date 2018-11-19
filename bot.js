@@ -67,6 +67,20 @@ bot.on('message', async message => {
         }
     }
 
+    if (message.content.substring(0, 9) === "!removegt") {
+        try {
+            var discordId = message.author.id;
+            var sql = `UPDATE users SET gamertag = null WHERE discord_id = $1`;
+            var removed = await pool.query(sql, [discordId]);
+            var role = message.member.guild.roles.find("name", "Linked");
+            message.member.removeRole(role).catch(err => console.log(err));
+            message.channel.send("Thanks, your gamertag is no longer linked")
+        } catch (e) {
+            console.log("Error removing gamertag ", e);
+            message.channel.send("Sorry, something went wrong unlinking your gamertag.");
+        }
+    }
+
     if (message.content.substring(0, 7) === "!showgt") {
         try {
             var user = message.mentions.members.first();

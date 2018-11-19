@@ -88,7 +88,7 @@ bot.on('message', async message => {
             console.log("User Id", user.id)
             var result = await pool.query(sql, [user.id]);
             console.log(result)
-            if (result.rowCount > 0 || result.rows[0].gamertag !== null) {
+            if (result.rowCount > 0 && result.rows[0].gamertag !== null) {
                 message.channel.send(`${user.displayName}'s gamertag is: ${result.rows[0].gamertag}`)
             } else {
                 message.channel.send(`${user.displayName}'s gamertag could not be found. Ensure you're requesting a gamertag for a linked account.`)

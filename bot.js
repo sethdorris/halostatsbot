@@ -193,6 +193,9 @@ function buildEmbed(data, author) {
     try {
         var kills = data.Results[0].Result.ArenaStats.TotalKills;
         var deaths = data.Results[0].Result.ArenaStats.TotalDeaths;
+        var shots = data.Results[0].Result.ArenaStats.TotalShotsFired;
+        var landed = data.Results[0].Result.ArenaStats.TotalShotsLanded;
+        var accuracy = (shots/landed).toFixed(2);
         var csr;
         var highestCsr;
         var authorImage;
@@ -271,6 +274,11 @@ function buildEmbed(data, author) {
                 name: "Highest CSR",
                 value: highestCsr.toString(),
                 inline: true
+            },
+            {
+                name: "Accuracy",
+                value: accuracy,
+                inline: true;
             }
         ],
         footer: { text : "If you have ideas for additional stats let BruiseR- know!"}

@@ -193,6 +193,7 @@ function buildEmbed(data, author) {
     try {
         var kills = data.Results[0].Result.ArenaStats.TotalKills;
         var deaths = data.Results[0].Result.ArenaStats.TotalDeaths;
+        var assists = data.Results[0].Result.ArenaStats.TotalAssists;
         var shots = data.Results[0].Result.ArenaStats.TotalShotsFired;
         var landed = data.Results[0].Result.ArenaStats.TotalShotsLanded;
         var accuracy = Math.round((landed/shots)*100);
@@ -273,6 +274,11 @@ function buildEmbed(data, author) {
             {
                 name: "Highest CSR",
                 value: highestCsr.toString(),
+                inline: true
+            },
+            {
+                name: "Assists",
+                value: assists,
                 inline: true
             },
             {

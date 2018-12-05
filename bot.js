@@ -144,8 +144,22 @@ bot.on('message', async message => {
         message.channel.send("Bot Help", { embed: embedObj })
     }
 
-    if (message.content.substring(0, 12) === "!startleague") {
-
+    if (message.content.substring(0, 6) === "!whois") {
+        var gamertag = message.content.substring(7);
+        try {
+            var sql = `SELECT discord_id FROM users WHERE gamertag = $1`;
+            var user = await pool.query(sql, [gamertag]);
+            console.log(user.rows[0])
+            var displayName = message.channel.members.filter(member => member.id = user.rows[0]);
+            console.log(displayName);
+            if (displayName !== null) {
+                message.channel.send(`You're looking at ${displayName[0].displayName}'s gamertag.`)
+            } else {
+                message.channel.send(`I do not know who that is!`);
+            }
+        } catch (e) {
+            message.channel.send("I do not know who that is.")
+        }
     }
 });
 

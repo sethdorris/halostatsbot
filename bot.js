@@ -202,6 +202,10 @@ bot.on('message', async message => {
               {
                   "name": "`!removegt`",
                   "value": "Removes the linked gamertag to your discord account."
+              },
+              {
+                  "name": "`!whois gamertaghere`",
+                  "value": "Finds the discord display name given a user's gamertag. Only works if the discord account has linked a gamertag in this server."
               }
             ]
         };

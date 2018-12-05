@@ -150,9 +150,10 @@ bot.on('message', async message => {
             var sql = `SELECT discord_id FROM users WHERE gamertag = $1`;
             var user = await pool.query(sql, [gamertag]);
             console.log("UserRows", user.rows[0])
-            var displayName = message.channel.members.get(`${user.rows[0].discord_id}`)
+            var displayName = message.guild.members.get(`${user.rows[0].discord_id}`)
+            console.log("Result", displayName)
             if (displayName !== null) {
-                message.channel.send(`You're looking at ${displayName[0].displayName}'s gamertag.`)
+                message.channel.send(`You're looking at ${displayName.displayName}'s gamertag.`)
             } else {
                 message.channel.send(`I do not know who that is!`);
             }

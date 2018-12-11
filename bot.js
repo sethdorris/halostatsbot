@@ -186,6 +186,7 @@ bot.on('message', async message => {
                         console.log("data", data)
                         var csr;
                         var highestCsr;
+                        var avgDmgGm = (data.Results[0].Result.ArenaStats.TotalWeaponDamage + data.Results[0].Result.ArenaStats.TotalPowerWeaponDamage + data.Results[0].Result.ArenaStats.TotalGrenadeDamage) / data.Results[0].Result.ArenaStats.TotalGamesCompleted
                         if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
                             switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
                                 case 0:
@@ -226,7 +227,8 @@ bot.on('message', async message => {
                             shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
                             landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
-                            csr: `${csr} ${highestCsr}`
+                            group: `${csr}`,
+                            tier: `${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
                         })
                         var lastGt = users.rows[users.rows.length -1].gamertag;
                         var isLast = lastGt == data.Results[0].Id;

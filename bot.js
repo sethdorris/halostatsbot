@@ -229,7 +229,7 @@ bot.on('message', async message => {
                             csr: `${csr} ${highestCsr}`
                         })
                         var lastGt = users.rows[users.rows.length -1].gamertag;
-                        var isLast = lastGt == data.Results[0].id;
+                        var isLast = lastGt == data.Results[0].Id;
                         console.log("Last Gt", lastGt)
                         console.log("Is Last", isLast)
                         if (isLast) {

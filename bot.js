@@ -209,7 +209,7 @@ bot.on('message', async message => {
                             highestCsr = "No CSR data available.";
                         }
                         csvData.push({
-                            gamertag: gamertag,
+                            gamertag: data.Results[0].Id,
                             kills: data.Results[0].Result.ArenaStats.TotalKills,
                             deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
                             kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),

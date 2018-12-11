@@ -184,9 +184,6 @@ bot.on('message', async message => {
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res => {
                         res.json();
-                        if (res.statusCode !== 200) {
-                            throw new Error("Api Limit Error")
-                        }
                     })
                     .then(data => {
                         console.log("data", data)

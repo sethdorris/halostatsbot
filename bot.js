@@ -172,9 +172,12 @@ bot.on('message', async message => {
             console.log("users", users.rows);
             var csvData = [];
             for (var i = 0; i < users.rows.length; i++) {
-                fetchUsersStats(users.rows[i].gamertag).then(data => {
-                    console.log("Fetch data", data)
-                })
+                fetchUsersStats(users.rows[i].gamertag)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log("data", data)
+                    })
+                    
             }
         } catch (e) {
             console.log("Error before fetch", e)

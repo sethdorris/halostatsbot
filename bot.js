@@ -162,6 +162,73 @@ bot.on('message', async message => {
             message.channel.send("I do not know who that is.")
         }
     }
+
+    if (message.content.substring(0, 13) === "!compilestats" && message.author.displayName === "BruiseR-") {
+        try {
+            var sql = `SELECT gamertag FROM users WHERE registered = true`;
+            var users = await pool.query(sql);
+            console.log("users", users.rows);
+            var csvData = [];
+            await users.rows.forEach(async (user) => {
+                var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${user.gamertag}`;
+                try {
+                    fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
+                        .then(res => res.json())
+                        .then(data => {
+                            var csr;
+                            var highestCsr;
+                            if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
+                                switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
+                                    case 0:
+                                        csr = "Unranked";
+                                        break;
+                                    case 1:
+                                        csr = "Bronze";
+                                        break;
+                                    case 2:
+                                        csr = "Silver";
+                                        break;
+                                    case 3:
+                                        csr = "Gold";
+                                        break;
+                                    case 4:
+                                        csr = "Platinum";
+                                        break;
+                                    case 5:
+                                        csr = "Diamond";
+                                        break;
+                                    case 6:
+                                        csr = "Onyx";
+                                        break;
+                                    case 7:
+                                        csr = "Champion"
+                                        break;
+                                }
+                                highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+                            } else {
+                                highestCsr = "No CSR data available.";
+                            }
+                            var obj = {
+                                gamertag: user.gamertag,
+                                kills: data.Results[0].Result.ArenaStats.TotalKills,
+                                deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
+                                kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),
+                                assists: data.Results[0].Result.ArenaStats.TotalAssists,
+                                shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
+                                landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
+                                accuracy: Math.round((landed/shots)*100),
+                            }
+                            csvData.push(obj);
+                        });
+                } catch (e) {
+                    console.log("fetch error", e)
+                }
+            })
+        } catch (e) {
+            console.log("Error before fetch", e)
+        }
+        console.log("csvData", csvData)
+    }
 });
 
     function buildHelpEmbed() {

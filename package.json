@@ -12,6 +12,7 @@
   "dependencies": {
     "bufferutil": "^3.0.2",
     "csgostatsnode": "^1.1.1",
+    "csv-stringify": "^5.1.1",
     "discord.js": "^11.2.1",
     "erlpack": "*",
     "libsodium-wrappers": "0.5.4",

@@ -163,8 +163,9 @@ bot.on('message', async message => {
         }
     }
 
-    if (message.content.substring(0, 13) === "!compilestats" && message.author.displayName === "BruiseR-") {
+    if (message.content.substring(0, 13) === "!compilestats") {
         console.log("Compiling stats...")
+        console.log("Author", message.author)
         try {
             var sql = `SELECT gamertag FROM users WHERE registered = true`;
             var users = await pool.query(sql);

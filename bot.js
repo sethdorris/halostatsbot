@@ -234,7 +234,9 @@ bot.on('message', async message => {
                         console.log("Is Last", isLast)
                         if (isLast) {
                             stringify(csvData, function(err, output) {
-                                message.channel.send(output)
+                                for (var i = 0; output.length; i + 2000) {
+                                    message.channel.send(output.substring(i, i + 1999))
+                                }
                             });
                         }
                     })

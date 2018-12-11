@@ -172,7 +172,7 @@ bot.on('message', async message => {
             console.log("users", users.rows);
             var csvData = [];
             for (var i = 0; i < users.rows.length; i++) {
-                var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${user.gamertag}`;
+                var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${users.rows[i].gamertag}`;
                 fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
                         .then(res => res.json())
                         .then(data => {

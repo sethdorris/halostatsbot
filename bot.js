@@ -179,7 +179,7 @@ bot.on('message', async message => {
                     await Timeout.set(11000);
                 }
                 var lastGt = users.rows[users.rows.length -1].gamertag;
-                var isLast = lastGt == users.rows[i];
+                var isLast = lastGt == users.rows[i].gamertag;
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res =>
                         res.json()
@@ -237,6 +237,7 @@ bot.on('message', async message => {
                                         console.log('Some error occured - file either not saved or corrupted file saved.');
                                     } else {
                                         console.log('It\'s saved!');
+                                        message.channel.send("Processing complete")
                                     }
                                 });
                             });

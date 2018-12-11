@@ -222,17 +222,17 @@ bot.on('message', async message => {
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             csr: `${csr} ${highestCsr}`
                         })
-                        stringify(csvData, function(err, output) {
-                            fs.writeFile('leaguedata.csv', output, 'utf8', function(err) {
-                                if (err) {
-                                    console.log('Some error occured - file either not saved or corrupted file saved.');
-                                } else {
-                                    console.log('It\'s saved!');
-                                }
-                            });
-                        });
                     })
             }
+            stringify(csvData, function(err, output) {
+                fs.writeFile('leaguedata.csv', output, 'utf8', function(err) {
+                    if (err) {
+                        console.log('Some error occured - file either not saved or corrupted file saved.');
+                    } else {
+                        console.log('It\'s saved!');
+                    }
+                });
+            });
         } catch (e) {
             console.log("Error before fetch", e)
             message.channel.send("Something went wrong before I could fetch data");

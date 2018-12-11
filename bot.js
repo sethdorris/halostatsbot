@@ -175,9 +175,52 @@ bot.on('message', async message => {
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res => res.json())
                     .then(data => {
-                        console.log("data", data)
-                    })
-                    
+                        var csr;
+                        var highestCsr;
+                        if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
+                            switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
+                                case 0:
+                                    csr = "Unranked";
+                                    break;
+                                case 1:
+                                    csr = "Bronze";
+                                    break;
+                                case 2:
+                                    csr = "Silver";
+                                    break;
+                                case 3:
+                                    csr = "Gold";
+                                    break;
+                                case 4:
+                                    csr = "Platinum";
+                                    break;
+                                case 5:
+                                    csr = "Diamond";
+                                    break;
+                                case 6:
+                                    csr = "Onyx";
+                                    break;
+                                case 7:
+                                    csr = "Champion"
+                                    break;
+                            }
+                            highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+                        } else {
+                            highestCsr = "No CSR data available.";
+                        }
+                        csvData.push({
+                            gamertag: gamertag,
+                            kills: data.Results[0].Result.ArenaStats.TotalKills,
+                            deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
+                            kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),
+                            assists: data.Results[0].Result.ArenaStats.TotalAssists,
+                            shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
+                            landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
+                            accuracy: Math.round((landed/shots)*100),
+                            csr: `${csr} ${highestCsr}`
+                        })
+                        console.log(csvData)
+                    });
             }
         } catch (e) {
             console.log("Error before fetch", e)

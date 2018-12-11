@@ -179,12 +179,16 @@ bot.on('message', async message => {
                         console.log("holding queue limit.")
                     }, 11000)
                 }
+                var lastGt = users.rows[users.rows.length -1].gamertag;
+                var isLast = lastGt == users.rows[i];
                 fetchUsersStats(users.rows[i].gamertag)
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.statusCode != 200) {
-                            throw new Error("API Error")
+                    .then(res => {
+                        res.json();
+                        if (res.statusCode !== 200) {
+                            throw new Error("Api Limit Error")
                         }
+                    })
+                    .then(data => {
                         console.log("data", data)
                         var csr;
                         var highestCsr;
@@ -230,17 +234,19 @@ bot.on('message', async message => {
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             csr: `${csr} ${highestCsr}`
                         })
+                        if (isLast) {
+                            stringify(csvData, function(err, output) {
+                                fs.writeFile('leaguedata.csv', output, 'utf8', function(err) {
+                                    if (err) {
+                                        console.log('Some error occured - file either not saved or corrupted file saved.');
+                                    } else {
+                                        console.log('It\'s saved!');
+                                    }
+                                });
+                            });
+                        }
                     })
             }
-            stringify(csvData, function(err, output) {
-                fs.writeFile('leaguedata.csv', output, 'utf8', function(err) {
-                    if (err) {
-                        console.log('Some error occured - file either not saved or corrupted file saved.');
-                    } else {
-                        console.log('It\'s saved!');
-                    }
-                });
-            });
         } catch (e) {
             console.log("Error before fetch", e)
             message.channel.send("Something went wrong before I could fetch data");

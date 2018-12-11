@@ -224,8 +224,7 @@ bot.on('message', async message => {
                             deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
                             kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),
                             assists: data.Results[0].Result.ArenaStats.TotalAssists,
-                            shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
-                            landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
+                            AvgDmgGm: avgDmgGm,
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             group: `${csr}`,
                             tier: `${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`

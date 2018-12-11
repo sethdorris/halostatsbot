@@ -174,9 +174,17 @@ bot.on('message', async message => {
             console.log("users", users.rows);
             var csvData = [];
             for (var i = 0; i < users.rows.length; i++) {
+                if (i === 9 || i === 19 || i === 29 || i === 39 || i === 49 || i === 59 || i === 69) {
+                    setTimeout(function() {
+                        console.log("holding queue limit.")
+                    }, 11000)
+                }
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res => res.json())
                     .then(data => {
+                        if (data.statusCode != 200) {
+                            throw new Error("API Error")
+                        }
                         console.log("data", data)
                         var csr;
                         var highestCsr;

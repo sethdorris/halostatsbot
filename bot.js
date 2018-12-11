@@ -171,10 +171,9 @@ bot.on('message', async message => {
             var users = await pool.query(sql);
             console.log("users", users.rows);
             var csvData = [];
-            await users.rows.forEach(async (user) => {
+            for (var i = 0; i < users.rows.length; i++) {
                 var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${user.gamertag}`;
-                try {
-                    fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
+                fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
                         .then(res => res.json())
                         .then(data => {
                             var csr;
@@ -222,11 +221,7 @@ bot.on('message', async message => {
                             }
                             csvData.push(obj);
                         });
-                } catch (e) {
-                    console.log("fetch error", e)
-                    message.channel.send("Something went wrong fetching data");
-                }
-            })
+            }
         } catch (e) {
             console.log("Error before fetch", e)
             message.channel.send("Something went wrong before I could fetch data");

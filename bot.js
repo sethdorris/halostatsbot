@@ -219,8 +219,7 @@ bot.on('message', async message => {
                             accuracy: Math.round((landed/shots)*100),
                             csr: `${csr} ${highestCsr}`
                         })
-                        console.log(csvData)
-                    });
+                    })
             }
         } catch (e) {
             console.log("Error before fetch", e)

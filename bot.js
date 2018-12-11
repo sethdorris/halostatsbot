@@ -172,6 +172,7 @@ bot.on('message', async message => {
             console.log("users", users.rows);
             var csvData = [];
             for (var i = 0; i < users.rows.length; i++) {
+                console.log("current user", users.rows[i])
                 fetchUsersStats(users.rows[i].gamertag).then(data => {
                     console.log("Fetch data", data)
                 })
@@ -372,7 +373,7 @@ var fetchUsersStats = async function(gamertag) {
                     highestCsr = "No CSR data available.";
                 }
                 return {
-                    gamertag: user.gamertag,
+                    gamertag: gamertag,
                     kills: data.Results[0].Result.ArenaStats.TotalKills,
                     deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
                     kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),

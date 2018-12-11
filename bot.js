@@ -163,7 +163,7 @@ bot.on('message', async message => {
         }
     }
 
-    if (message.content.substring(0, 13) === "!compilestats") {
+    if (message.content.substring(0, 13) === "!compilestats" && message.author.username === "BruiseR-") {
         console.log("Compiling stats...")
         console.log("Author", message.author)
         try {
@@ -172,61 +172,14 @@ bot.on('message', async message => {
             console.log("users", users.rows);
             var csvData = [];
             for (var i = 0; i < users.rows.length; i++) {
-                var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${users.rows[i].gamertag}`;
-                fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
-                        .then(res => res.json())
-                        .then(data => {
-                            var csr;
-                            var highestCsr;
-                            if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
-                                switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
-                                    case 0:
-                                        csr = "Unranked";
-                                        break;
-                                    case 1:
-                                        csr = "Bronze";
-                                        break;
-                                    case 2:
-                                        csr = "Silver";
-                                        break;
-                                    case 3:
-                                        csr = "Gold";
-                                        break;
-                                    case 4:
-                                        csr = "Platinum";
-                                        break;
-                                    case 5:
-                                        csr = "Diamond";
-                                        break;
-                                    case 6:
-                                        csr = "Onyx";
-                                        break;
-                                    case 7:
-                                        csr = "Champion"
-                                        break;
-                                }
-                                highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
-                            } else {
-                                highestCsr = "No CSR data available.";
-                            }
-                            var obj = {
-                                gamertag: user.gamertag,
-                                kills: data.Results[0].Result.ArenaStats.TotalKills,
-                                deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
-                                kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),
-                                assists: data.Results[0].Result.ArenaStats.TotalAssists,
-                                shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
-                                landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
-                                accuracy: Math.round((landed/shots)*100),
-                            }
-                            csvData.push(obj);
-                        });
+                fetchUsersStats(users.rows[i].gamertag).then(data => {
+                    console.log("Fetch data", data)
+                })
             }
         } catch (e) {
             console.log("Error before fetch", e)
             message.channel.send("Something went wrong before I could fetch data");
         }
-        console.log("csvData", csvData)
     }
 });
 
@@ -378,4 +331,56 @@ function buildEmbed(data, author) {
         ],
         footer: { text : "If you have ideas for additional stats let BruiseR- know!"}
     }
+}
+
+var fetchUsersStats = async function(gamertag) {
+    var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${gamertag}`;
+    return fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
+            .then(res => res.json())
+            .then(data => {
+                var csr;
+                var highestCsr;
+                if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
+                    switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
+                        case 0:
+                            csr = "Unranked";
+                            break;
+                        case 1:
+                            csr = "Bronze";
+                            break;
+                        case 2:
+                            csr = "Silver";
+                            break;
+                        case 3:
+                            csr = "Gold";
+                            break;
+                        case 4:
+                            csr = "Platinum";
+                            break;
+                        case 5:
+                            csr = "Diamond";
+                            break;
+                        case 6:
+                            csr = "Onyx";
+                            break;
+                        case 7:
+                            csr = "Champion"
+                            break;
+                    }
+                    highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+                } else {
+                    highestCsr = "No CSR data available.";
+                }
+                return {
+                    gamertag: user.gamertag,
+                    kills: data.Results[0].Result.ArenaStats.TotalKills,
+                    deaths: data.Results[0].Result.ArenaStats.TotalDeaths,
+                    kd: (data.Results[0].Result.ArenaStats.TotalKills / data.Results[0].Result.ArenaStats.TotalDeaths).toFixed(2),
+                    assists: data.Results[0].Result.ArenaStats.TotalAssists,
+                    shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
+                    landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
+                    accuracy: Math.round((landed/shots)*100),
+                    csr: `${csr} ${highestCsr}`
+                }
+            });
 }

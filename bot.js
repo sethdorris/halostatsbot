@@ -164,6 +164,7 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 13) === "!compilestats" && message.author.displayName === "BruiseR-") {
+        console.log("Compiling stats...")
         try {
             var sql = `SELECT gamertag FROM users WHERE registered = true`;
             var users = await pool.query(sql);
@@ -222,10 +223,12 @@ bot.on('message', async message => {
                         });
                 } catch (e) {
                     console.log("fetch error", e)
+                    message.channel.send("Something went wrong fetching data");
                 }
             })
         } catch (e) {
             console.log("Error before fetch", e)
+            message.channel.send("Something went wrong before I could fetch data");
         }
         console.log("csvData", csvData)
     }

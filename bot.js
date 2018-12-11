@@ -181,9 +181,9 @@ bot.on('message', async message => {
                 var lastGt = users.rows[users.rows.length -1].gamertag;
                 var isLast = lastGt == users.rows[i];
                 fetchUsersStats(users.rows[i].gamertag)
-                    .then(res => {
-                        res.json();
-                    })
+                    .then(res =>
+                        res.json()
+                    )
                     .then(data => {
                         console.log("data", data)
                         var csr;

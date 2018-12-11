@@ -4,6 +4,7 @@ var fetch = require("node-fetch");
 var dbconfig = require("./dbconfig");
 var bot = new Discord.Client();
 var pg = require("pg");
+var stringify = require('csv-stringify');
 const pool = new pg.Pool(dbconfig.development);
 bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
 
@@ -217,9 +218,18 @@ bot.on('message', async message => {
                             assists: data.Results[0].Result.ArenaStats.TotalAssists,
                             shots: data.Results[0].Result.ArenaStats.TotalShotsFired,
                             landed: data.Results[0].Result.ArenaStats.TotalShotsLanded,
-                            accuracy: Math.round((landed/shots)*100),
+                            accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             csr: `${csr} ${highestCsr}`
                         })
+                        stringify(csvData, function(err, output) {
+                            fs.writeFile('leaguedata.csv', output, 'utf8', function(err) {
+                                if (err) {
+                                    console.log('Some error occured - file either not saved or corrupted file saved.');
+                                } else {
+                                    console.log('It\'s saved!');
+                                }
+                            });
+                        });
                     })
             }
         } catch (e) {

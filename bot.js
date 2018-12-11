@@ -234,14 +234,7 @@ bot.on('message', async message => {
                         console.log("Is Last", isLast)
                         if (isLast) {
                             stringify(csvData, function(err, output) {
-                                fs.writeFileSync('./leaguedata.csv', output, 'utf8', function(err) {
-                                    if (err) {
-                                        console.log('Some error occured - file either not saved or corrupted file saved.');
-                                    } else {
-                                        console.log('It\'s saved!');
-                                        message.channel.send("Processing complete")
-                                    }
-                                });
+                                message.channel.send(output)
                             });
                         }
                     })

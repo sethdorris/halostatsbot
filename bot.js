@@ -175,6 +175,7 @@ bot.on('message', async message => {
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res => res.json())
                     .then(data => {
+                        console.log("data", data)
                         var csr;
                         var highestCsr;
                         if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
@@ -378,7 +379,8 @@ function buildEmbed(data, author) {
     }
 }
 
-var fetchUsersStats = async function(gamertag) {
+var fetchUsersStats = function(gamertag) {
+    console.log("Gamertag", gamertag)
     var getString = `https://www.haloapi.com/stats/h5/servicerecords/arena?players=${gamertag}`;
     return fetch(getString, { method: "GET", headers: { "Ocp-Apim-Subscription-Key": haloApiKey } })
 }

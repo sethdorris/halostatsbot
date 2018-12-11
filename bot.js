@@ -178,10 +178,6 @@ bot.on('message', async message => {
                 if (i === 9 || i === 19 || i === 29 || i === 39 || i === 49 || i === 59 || i === 69) {
                     await Timeout.set(11000);
                 }
-                var lastGt = users.rows[users.rows.length -1].gamertag;
-                var isLast = lastGt == users.rows[i].gamertag;
-                console.log("Last Gt", lastGt)
-                console.log("Is Last", isLast)
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res =>
                         res.json()
@@ -232,9 +228,13 @@ bot.on('message', async message => {
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             csr: `${csr} ${highestCsr}`
                         })
+                        var lastGt = users.rows[users.rows.length -1].gamertag;
+                        var isLast = lastGt == data.Results[0].id;
+                        console.log("Last Gt", lastGt)
+                        console.log("Is Last", isLast)
                         if (isLast) {
                             stringify(csvData, function(err, output) {
-                                fs.writeFile('./leaguedata.csv', output, 'utf8', function(err) {
+                                fs.writeFileSync('./leaguedata.csv', output, 'utf8', function(err) {
                                     if (err) {
                                         console.log('Some error occured - file either not saved or corrupted file saved.');
                                     } else {

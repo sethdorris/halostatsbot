@@ -10,6 +10,7 @@
     "node": "8.6.0"
   },
   "dependencies": {
+    "await-timeout": "^0.3.0",
     "bufferutil": "^3.0.2",
     "csgostatsnode": "^1.1.1",
     "csv-stringify": "^5.1.1",

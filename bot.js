@@ -5,6 +5,7 @@ var dbconfig = require("./dbconfig");
 var bot = new Discord.Client();
 var fs = require("fs");
 var pg = require("pg");
+var Timeout = require("await-timeout")
 var stringify = require('csv-stringify');
 const pool = new pg.Pool(dbconfig.development);
 bot.login("Mzg1ODA0MTY0MTUzNzM3MjE4.DQG1yg.d_oEjcrI322_6R8KjO7guKJO4zg");
@@ -175,9 +176,7 @@ bot.on('message', async message => {
             var csvData = [];
             for (var i = 0; i < users.rows.length; i++) {
                 if (i === 9 || i === 19 || i === 29 || i === 39 || i === 49 || i === 59 || i === 69) {
-                    setTimeout(function() {
-                        console.log("holding queue limit.")
-                    }, 11000)
+                    await Timeout.set(11000);
                 }
                 var lastGt = users.rows[users.rows.length -1].gamertag;
                 var isLast = lastGt == users.rows[i];

@@ -180,6 +180,8 @@ bot.on('message', async message => {
                 }
                 var lastGt = users.rows[users.rows.length -1].gamertag;
                 var isLast = lastGt == users.rows[i].gamertag;
+                console.log("Last Gt", lastGt)
+                console.log("Is Last", isLast)
                 fetchUsersStats(users.rows[i].gamertag)
                     .then(res =>
                         res.json()
@@ -232,7 +234,7 @@ bot.on('message', async message => {
                         })
                         if (isLast) {
                             stringify(csvData, function(err, output) {
-                                fs.writeFile('leaguedata.csv', output, 'utf8', function(err) {
+                                fs.writeFile('./leaguedata.csv', output, 'utf8', function(err) {
                                     if (err) {
                                         console.log('Some error occured - file either not saved or corrupted file saved.');
                                     } else {

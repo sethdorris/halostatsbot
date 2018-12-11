@@ -3,6 +3,7 @@ const haloApiKey = "0820ab16b84e419db0d34dcda8fc91c3";
 var fetch = require("node-fetch");
 var dbconfig = require("./dbconfig");
 var bot = new Discord.Client();
+var fs = require("fs");
 var pg = require("pg");
 var stringify = require('csv-stringify');
 const pool = new pg.Pool(dbconfig.development);

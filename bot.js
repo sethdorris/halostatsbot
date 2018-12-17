@@ -396,7 +396,7 @@ function buildEmbed(data, author) {
             },
             {
                 name: "Avg. Dmg Game",
-                value: avgDmgGm,
+                value: avgDmgGm.toString(),
                 inline: true
             }
         ],

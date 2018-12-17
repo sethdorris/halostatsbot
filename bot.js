@@ -396,7 +396,7 @@ function buildEmbed(data, author) {
             },
             {
                 name: "Avg. Dmg Game",
-                value: avgDmgGm.toString(),
+                value: Math.round(avgDmgGm).toString(),
                 inline: true
             }
         ],

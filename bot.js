@@ -303,6 +303,7 @@ function buildEmbed(data, author) {
         var assists = data.Results[0].Result.ArenaStats.TotalAssists;
         var shots = data.Results[0].Result.ArenaStats.TotalShotsFired;
         var landed = data.Results[0].Result.ArenaStats.TotalShotsLanded;
+        var avgDmgGm = (data.Results[0].Result.ArenaStats.TotalWeaponDamage + data.Results[0].Result.ArenaStats.TotalPowerWeaponDamage + data.Results[0].Result.ArenaStats.TotalGrenadeDamage) / data.Results[0].Result.ArenaStats.TotalGamesCompleted;
         var accuracy = Math.round((landed/shots)*100);
         var csr;
         var highestCsr;
@@ -391,6 +392,11 @@ function buildEmbed(data, author) {
             {
                 name: "Accuracy",
                 value: accuracy + "%",
+                inline: true
+            },
+            {
+                name: "Avg. Dmg Game",
+                value: avgDmgGm,
                 inline: true
             }
         ],

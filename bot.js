@@ -81,7 +81,7 @@ bot.on('message', async message => {
             var sql = `DELETE FROM users WHERE discord_id = $1`;
             var sql1 = `DELETE FROM seasons_users WHERE user_id = $1;`
             var userId = await pool.query(userIdSql, [discordId]);
-            var removedFromSeasons = await pool.query(sql1, [userIdSql.rows[0].id])
+            var removedFromSeasons = await pool.query(sql1, [userId.rows[0].id])
             var removed = await pool.query(sql, [discordId]);
             var role = message.member.guild.roles.find("name", "Linked");
             message.member.removeRole(role).catch(err => console.log(err));

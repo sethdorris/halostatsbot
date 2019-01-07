@@ -34,6 +34,10 @@ bot.on("guildMemberAdd", async member => {
     }
 });
 
+bot.on("guildMemberRemove", async member => {
+  channel.send(`${member} has left the Server.`)
+})
+
 bot.on('message', async message => {
     var embed;
     var richEmbed;
@@ -73,7 +77,11 @@ bot.on('message', async message => {
     if (message.content.substring(0, 9) === "!removegt") {
         try {
             var discordId = message.author.id;
+            var userIdSql = `SELECT id FROM users WHERE discord_id = $1;`
             var sql = `DELETE FROM users WHERE discord_id = $1`;
+            var sql1 = `DELETE FROM seasons_users WHERE user_id = $1;`
+            var userId = await pool.query(userIdSql, [discordId]);
+            var removedFromSeasons = await pool.query(sql1, [userIdSql.rows[0].id])
             var removed = await pool.query(sql, [discordId]);
             var role = message.member.guild.roles.find("name", "Linked");
             message.member.removeRole(role).catch(err => console.log(err));
@@ -119,7 +127,7 @@ bot.on('message', async message => {
         //    message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
         //}
     }
-    
+
     if (message.content.substring(0, 12) === "!leaguecount") {
         var sql = `SELECT * FROM users WHERE registered = true`;
         try {

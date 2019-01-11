@@ -35,6 +35,7 @@ bot.on("guildMemberAdd", async member => {
 });
 
 bot.on("guildMemberRemove", async member => {
+  var channel = member.guild.channels.find('name', 'general')
   channel.send(`${member} has left the Server.`)
 })
 
@@ -111,7 +112,7 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 9) === "!register") {
-        message.channel.send("Aww shucks Registration for Season 1 is currently Closed; we are setting up Season 2 Registration, please check back soon.")
+        message.channel.send("Aww shucks Registration for Season 1 is currently Closed; we are setting up Season 2 Registration, please check back in late January.")
         //var role = message.member.guild.roles.find("name", "League Competitor");
         //try {
         //    var user = message.member;

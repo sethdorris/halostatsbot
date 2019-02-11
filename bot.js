@@ -22,7 +22,7 @@ bot.on("guildMemberAdd", async member => {
         var user = await pool.query(sql, [member.id]);
         var channel = member.guild.channels.find('name', 'general');
         if (user.rowCount < 1) {
-            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. Season 1 is currently in-progress and as such do not accept new registrations. Season 2 registration will open in early February!`)
+            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. Season 1 is currently in-progress and as such do not accept new registrations. Season 2 registration will open in the next few days!`)
         } else {
             channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
             var role = member.guild.roles.find("name", "Linked");
@@ -112,7 +112,7 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 9) === "!register") {
-        message.channel.send("Aww shucks Registration for Season 1 is currently Closed; we are setting up Season 2 Registration, please check back in late January.")
+        message.channel.send("Aww shucks Registration for Season 1 is currently Closed; we are setting up Season 2 Registration, please check back in the next few days.")
         //var role = message.member.guild.roles.find("name", "League Competitor");
         //try {
         //    var user = message.member;

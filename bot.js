@@ -228,6 +228,7 @@ bot.on('message', async message => {
                         } else {
                             highestCsr = "No CSR data available.";
                         }
+                        var tier = csr == "Champion" || csr == "Onyx" ? data.Results[0].Result.ArenaStats.HighestCsrAttained.Csr : data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier;
                         csvData.push({
                             gamertag: data.Results[0].Id,
                             kills: data.Results[0].Result.ArenaStats.TotalKills,
@@ -237,7 +238,7 @@ bot.on('message', async message => {
                             AvgDmgGm: avgDmgGm,
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             group: `${csr}`,
-                            tier: `${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+                            tier: tier
                         })
                         var lastGt = users.rows[users.rows.length -1].gamertag;
                         var isLast = lastGt == data.Results[0].Id;

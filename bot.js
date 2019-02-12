@@ -349,7 +349,7 @@ function buildEmbed(data, author) {
             }
             
             
-            highestCsr = csr == "Champion" || csr == "Onyx" ? `${csr} ${data.results[0].Result.ArenaStats.HighestCsrAttained.Csr}` 
+            highestCsr = csr == "Champion" || csr == "Onyx" ? `${csr} ${data.results[0].Result.ArenaStats.HighestCsrAttained.Csr}` : `${csr} ${data.results[0].Result.ArenaStats.HighestCsrAttained.Tier}`;  
         } else {
             highestCsr = "No CSR data available.";
             authorImage = "";

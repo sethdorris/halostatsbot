@@ -347,7 +347,9 @@ function buildEmbed(data, author) {
                     csr = "Champion"
                     break;
             }
-            highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+            
+            
+            highestCsr = csr == "Champion" || csr == "Onyx" ? `${csr} ${data.results[0].Result.ArenaStats.HighestCsrAttained.Csr}` 
         } else {
             highestCsr = "No CSR data available.";
             authorImage = "";

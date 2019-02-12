@@ -346,10 +346,8 @@ function buildEmbed(data, author) {
                 case 7:
                     csr = "Champion"
                     break;
-            }
-            
-            
-            highestCsr = csr == "Champion" || csr == "Onyx" ? `${csr} ${data.results[0].Result.ArenaStats.HighestCsrAttained.Csr}` : `${csr} ${data.results[0].Result.ArenaStats.HighestCsrAttained.Tier}`;  
+            } 
+            highestCsr = csr == "Champion" || csr == "Onyx" ? `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Csr}` : `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`;  
         } else {
             highestCsr = "No CSR data available.";
             authorImage = "";

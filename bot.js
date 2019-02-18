@@ -316,7 +316,6 @@ function buildEmbed(data, author) {
         var csr;
         var highestCsr;
         var totalTimePlayed = data.Results[0].Result.ArenaStats.TotalTimePlayed;
-        var days = totalTimePlayed.
         var authorImage;
         if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
             switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {

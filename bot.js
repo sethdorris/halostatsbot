@@ -137,7 +137,8 @@ bot.on('message', async message => {
         var sql = `SELECT COUNT(*) FROM seasons_users WHERE season_id = 2;`;
         try {
             var total = await pool.query(sql);
-            message.channel.send(`There are ${total.rowCount} registered participants for the upcoming league!`)
+            console.log(total);
+            message.channel.send(`There are ${total.rows[0].count} registered participants for the upcoming league!`)
         } catch (e) {
             message.channel.send("Whoops something went wrong. Someone slap BruiseR-!");
         }

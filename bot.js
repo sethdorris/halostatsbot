@@ -112,11 +112,12 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 9) === "!register") {
-        var role = message.member.guild.roles.find("name", "Season 2 League Competitor");
+        var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
         try {
             var user = message.member;
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             var result = await pool.query(sql, [user.id]);
+            console.log(result);
             var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2) RETURNING user_id;`
             var result2 = await pool.query(sql, [result.rows[0].id]);
             if (result.rowCount < 1) { throw new Error("You must link your gamertag first.") }

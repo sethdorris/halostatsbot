@@ -115,6 +115,11 @@ bot.on('message', async message => {
         var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
         try {
             var user = message.member;
+            var registeredSql = `SELECT * FROM seasons_users WHERE user_id = $1`;
+            var alreadyRegistered = await pool.query(registeredSql, [user.id]);
+            if (alreadyRegistered.rowCount > 0) {
+                throw new Error("You already registered dude.")
+            }
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             var result = await pool.query(sql, [user.id]);
             console.log(result);

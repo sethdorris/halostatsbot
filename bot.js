@@ -121,9 +121,6 @@ bot.on('message', async message => {
             var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2) RETURNING user_id;`
             var result2 = await pool.query(sql, [result.rows[0].id]);
             if (result.rowCount < 1) { throw new Error("You must link your gamertag first.") }
-            if (result2.rowCount < 1) {
-                throw new Error("Server Error. Please post in the #Support channel");
-            }
             message.member.addRole(role);
             message.channel.send("You are now a registered competitor for the Halo Draft League!")
         } catch (e) {

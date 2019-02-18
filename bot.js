@@ -112,21 +112,19 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 9) === "!register") {
-        message.channel.send("Aww shucks Registration for Season 1 is currently Closed; we are setting up Season 2 Registration, please check back in the next few days.")
-        //var role = message.member.guild.roles.find("name", "League Competitor");
-        //try {
-        //    var user = message.member;
-        //    var sql = `SELECT * FROM users WHERE discord_id = $1`;
-        //    var result = await pool.query(sql, [user.id]);
-        //    if (result.rowCount < 1) { throw new Error("You must link your gamertag first.")}
-        //    var sql2 = `UPDATE users SET registered = true WHERE discord_id = $1`;
-        //    var result2 = await pool.query(sql2, [user.id]);
-        //    if (result2.rowCount < 1) { throw new Error("Kick BruiseR!")}
-        //    message.member.addRole(role);
-        //    message.channel.send("You are now a registered competitor for the Halo Draft League!")
-        //} catch (e) {
-        //    message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
-        //}
+        var role = message.member.guild.roles.find("name", "Season 2 League Competitor");
+        try {
+            var user = message.member;
+            var sql = `SELECT * FROM users WHERE discord_id = $1`;
+            var result = await pool.query(sql, [user.id]);
+            var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2);`
+            var result2 = await pool.query(sql, [result.rows[0].id]);
+            if (result.rowCount < 1) { throw new Error("You must link your gamertag first.")}
+            message.member.addRole(role);
+            message.channel.send("You are now a registered competitor for the Halo Draft League!")
+        } catch (e) {
+            message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
+        }
     }
 
     if (message.content.substring(0, 12) === "!leaguecount") {
@@ -317,6 +315,8 @@ function buildEmbed(data, author) {
         var accuracy = Math.round((landed/shots)*100);
         var csr;
         var highestCsr;
+        var totalTimePlayed = data.Results[0].Result.ArenaStats.TotalTimePlayed;
+        var days = totalTimePlayed.
         var authorImage;
         if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
             switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {

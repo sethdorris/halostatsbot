@@ -120,6 +120,7 @@ bot.on('message', async message => {
             console.log(result);
             var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2) RETURNING user_id;`
             var result2 = await pool.query(sql, [result.rows[0].id]);
+            console.log(result2);
             if (result.rowCount < 1) { throw new Error("You must link your gamertag first.") }
             message.member.addRole(role);
             message.channel.send("You are now a registered competitor for the Halo Draft League!")
@@ -130,7 +131,7 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 12) === "!leaguecount") {
-        var sql = `SELECT * FROM users WHERE registered = true`;
+        var sql = `SELECT COUNT(*) FROM seasons_users WHERE season_id = 2;`;
         try {
             var total = await pool.query(sql);
             message.channel.send(`There are ${total.rowCount} registered participants for the upcoming league!`)

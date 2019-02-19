@@ -117,7 +117,7 @@ bot.on('message', async message => {
             var user = message.member;
             var sql = `SELECT * FROM users WHERE discord_id = $1`;
             var result = await pool.query(sql, [user.id]);
-            var registeredSql = `SELECT * FROM seasons_users WHERE user_id = $1`;
+            var registeredSql = `SELECT * FROM seasons_users WHERE user_id = $1 AND season_id = 2`;
             var alreadyRegistered = await pool.query(registeredSql, [result.rows[0].id]);
             if (alreadyRegistered.rowCount > 0) {
                 throw new Error("You already registered dude.")
@@ -152,9 +152,11 @@ bot.on('message', async message => {
     if (message.content.substring(0, 11) === "!quitleague") {
         var user = message.member;
         try {
-            var sql = `UPDATE users SET registered = false WHERE discord_id = $1`;
-            var removed = await pool.query(sql, [user.id]);
-            var role = message.member.guild.roles.find("name", "League Competitor");
+            var findPlayer = `SELECT * FROM users WHERE discord_id = $1;`;
+            var player = away pool.query(findPlayer, [user.id]);
+            var sql = `DELETE FROM seasons_users WHERE user_id = $1`;
+            var removed = await pool.query(sql, [player.rows[0].id]);
+            var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
             message.member.removeRole(role);
             message.channel.send("Aww. Sorry to see you go! I removed you from the league.")
         } catch (e) {

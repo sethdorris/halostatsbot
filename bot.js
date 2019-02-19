@@ -153,7 +153,7 @@ bot.on('message', async message => {
         var user = message.member;
         try {
             var findPlayer = `SELECT * FROM users WHERE discord_id = $1;`;
-            var player = away pool.query(findPlayer, [user.id]);
+            var player = await pool.query(findPlayer, [user.id]);
             var sql = `DELETE FROM seasons_users WHERE user_id = $1`;
             var removed = await pool.query(sql, [player.rows[0].id]);
             var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");

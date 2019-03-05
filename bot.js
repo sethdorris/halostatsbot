@@ -189,6 +189,7 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 14) === "!getregistered" && message.author.username === "ReamSeamer") {
+        console.log("compiling ")
         try {
             var sql = "SELECT * FROM seasons_users JOIN users on seasons_users.user_id = users.id WHERE seasons_users.season_id = 2;";
             var users = await pool.query(sql);

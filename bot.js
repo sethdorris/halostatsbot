@@ -199,7 +199,7 @@ bot.on('message', async message => {
                 csvData.push(item.gamertag)
             })
             console.log("data", csvData)
-            stringify(csvData, (err, output) => { console.log(output) })
+            stringify(csvData, (err, output) => { console.log("stringified data", output) })
         } catch (e) {
             console.log(e)
         }

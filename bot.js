@@ -194,7 +194,7 @@ bot.on('message', async message => {
             var sql = "SELECT * FROM seasons_users JOIN users on seasons_users.user_id = users.id WHERE seasons_users.season_id = 2;";
             var users = await pool.query(sql);
             var csvData = [];
-            csvData.push(users.rows);
+            users.rows.forEach(item => csvData.push(item.gamertag))
             stringify(csvData, (err, output) => { console.log(output) })
         } catch (e) {
             console.log(e)

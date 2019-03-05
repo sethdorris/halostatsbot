@@ -195,6 +195,8 @@ bot.on('message', async message => {
             var csvData = [];
             csvData.push(users.rows);
             stringify(csvData, (err, output) => { console.log(output) })
+        } catch (e) {
+            console.log(e)
         }
     }
 

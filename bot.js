@@ -196,7 +196,7 @@ bot.on('message', async message => {
             var csvData = [];
             users.rows.forEach(item => { 
                 console.log(item)
-                csvData.push({ item.gamertag })
+                csvData.push({ "gamertag": item.gamertag })
             })
             console.log("data", csvData)
             stringify(csvData, (err, output) => { console.log("stringified data", output); console.log("error", err) })

@@ -22,7 +22,7 @@ bot.on("guildMemberAdd", async member => {
         var user = await pool.query(sql, [member.id]);
         var channel = member.guild.channels.find('name', 'general');
         if (user.rowCount < 1) {
-            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. Season 1 is currently in-progress and as such do not accept new registrations. Season 2 registration will open in the next few days!`)
+            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. Congrats to Scarrz Esports our Season 1 Champs!. Season 2 registration is live, register by typing \`!register\` after you have linked your GT!`)
         } else {
             channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
             var role = member.guild.roles.find("name", "Linked");
@@ -91,6 +91,10 @@ bot.on('message', async message => {
             console.log("Error removing gamertag ", e);
             message.channel.send("Sorry, something went wrong unlinking your gamertag.");
         }
+    }
+
+    if (message.content.substring(0, 12) === "!servercount") {
+        message.channel.send(`There are ${message.guild.members.filter(member => !member.user.bot).size} players in the server`);
     }
 
     if (message.content.substring(0, 7) === "!showgt") {

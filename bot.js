@@ -22,7 +22,7 @@ bot.on("guildMemberAdd", async member => {
         var user = await pool.query(sql, [member.id]);
         var channel = member.guild.channels.find('name', 'general');
         if (user.rowCount < 1) {
-            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. Congrats to Scarrz Esports our Season 1 Champs!. Season 2 registration is live, register by typing \`!register\` after you have linked your GT!`)
+            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. Congrats to Scarrz Esports our Inaugural Season Champs! Spring Season registration is closed, Summer season registration will open late summer.`)
         } else {
             channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
             var role = member.guild.roles.find("name", "Linked");
@@ -115,32 +115,32 @@ bot.on('message', async message => {
         }
     }
 
-    if (message.content.substring(0, 9) === "!register") {
-        var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
-        try {
-            var user = message.member;
-            var sql = `SELECT * FROM users WHERE discord_id = $1`;
-            var result = await pool.query(sql, [user.id]);
-            var registeredSql = `SELECT * FROM seasons_users WHERE user_id = $1 AND season_id = 2`;
-            var alreadyRegistered = await pool.query(registeredSql, [result.rows[0].id]);
-            if (alreadyRegistered.rowCount > 0) {
-                throw new Error("You already registered dude.")
-            }
-            console.log(result);
-            var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2) RETURNING user_id;`
-            var result2 = await pool.query(sql2, [result.rows[0].id]);
-            console.log(result2);
-            if (result.rowCount < 1) { throw new Error("You must link your gamertag first.") }
-            if (result2.rowCount < 1) {
-                throw new Error(`Server Error`);
-            }
-            message.member.addRole(role);
-            message.channel.send("You are now a registered competitor for the Halo Draft League!")
-        } catch (e) {
-            console.log(e);
-            message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
-        }
-    }
+    //if (message.content.substring(0, 9) === "!register") {
+    //    var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
+    //    try {
+    //        var user = message.member;
+    //        var sql = `SELECT * FROM users WHERE discord_id = $1`;
+    //        var result = await pool.query(sql, [user.id]);
+    //        var registeredSql = `SELECT * FROM seasons_users WHERE user_id = $1 AND season_id = 2`;
+    //        var alreadyRegistered = await pool.query(registeredSql, [result.rows[0].id]);
+    //        if (alreadyRegistered.rowCount > 0) {
+    //            throw new Error("You already registered dude.")
+    //        }
+    //        console.log(result);
+    //        var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2) RETURNING user_id;`
+    //        var result2 = await pool.query(sql2, [result.rows[0].id]);
+    //        console.log(result2);
+    //        if (result.rowCount < 1) { throw new Error("You must link your gamertag first.") }
+    //        if (result2.rowCount < 1) {
+    //            throw new Error(`Server Error`);
+    //        }
+    //        message.member.addRole(role);
+    //        message.channel.send("You are now a registered competitor for the Halo Draft League!")
+    //    } catch (e) {
+    //        console.log(e);
+    //        message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
+    //    }
+    //}
 
     if (message.content.substring(0, 12) === "!leaguecount") {
         var sql = `SELECT COUNT(*) FROM seasons_users WHERE season_id = 2;`;

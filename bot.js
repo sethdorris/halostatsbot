@@ -21,9 +21,7 @@ bot.on("guildMemberAdd", async member => {
         var sql = `SELECT * FROM users WHERE discord_id = $1`;
         var user = await pool.query(sql, [member.id]);
         var channel = member.guild.channels.find('name', 'general');
-        if (user.rowCount < 1) {
-            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
-        } else {
+        if (user.rowCount > 1) {
             channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
             var role = member.guild.roles.find("name", "Linked");
             member.addRole(role).catch(err => console.log(err));

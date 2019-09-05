@@ -22,7 +22,7 @@ bot.on("guildMemberAdd", async member => {
         var user = await pool.query(sql, [member.id]);
         var channel = member.guild.channels.find('name', 'general');
         if (user.rowCount < 1) {
-            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\`. If you want to register for the league first link your gamertag and then in a message by itself type \`!register\`.`)
+            channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
         } else {
             channel.send(`Welcome back to the Halo Draft League. We found your gamertag: ${user.rows[0].gamertag}`)
             var role = member.guild.roles.find("name", "Linked");
@@ -33,10 +33,6 @@ bot.on("guildMemberAdd", async member => {
         channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
     }
 });
-
-bot.on("guildMemberRemove", async member => {
-  channel.send(`${member} has left the Server.`)
-})
 
 bot.on('message', async message => {
     var embed;

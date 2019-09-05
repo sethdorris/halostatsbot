@@ -88,6 +88,10 @@ bot.on('message', async message => {
         }
     }
 
+    if (message.content.substring(0, 12) === "!servercount") {
+        message.channel.send(`There are ${message.guild.members.filter(member => !member.user.bot).size} players in the server`);
+    }
+
     if (message.content.substring(0, 7) === "!showgt") {
         try {
             var user = message.mentions.members.first();
@@ -106,29 +110,39 @@ bot.on('message', async message => {
         }
     }
 
-    if (message.content.substring(0, 9) === "!register") {
-        message.channel.send("Aww shucks Registration for Season 1 is currently Closed; we are setting up Season 2 Registration, please check back soon.")
-        //var role = message.member.guild.roles.find("name", "League Competitor");
-        //try {
-        //    var user = message.member;
-        //    var sql = `SELECT * FROM users WHERE discord_id = $1`;
-        //    var result = await pool.query(sql, [user.id]);
-        //    if (result.rowCount < 1) { throw new Error("You must link your gamertag first.")}
-        //    var sql2 = `UPDATE users SET registered = true WHERE discord_id = $1`;
-        //    var result2 = await pool.query(sql2, [user.id]);
-        //    if (result2.rowCount < 1) { throw new Error("Kick BruiseR!")}
-        //    message.member.addRole(role);
-        //    message.channel.send("You are now a registered competitor for the Halo Draft League!")
-        //} catch (e) {
-        //    message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
-        //}
-    }
+    //if (message.content.substring(0, 9) === "!register") {
+    //    var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
+    //    try {
+    //        var user = message.member;
+    //        var sql = `SELECT * FROM users WHERE discord_id = $1`;
+    //        var result = await pool.query(sql, [user.id]);
+    //        var registeredSql = `SELECT * FROM seasons_users WHERE user_id = $1 AND season_id = 2`;
+    //        var alreadyRegistered = await pool.query(registeredSql, [result.rows[0].id]);
+    //        if (alreadyRegistered.rowCount > 0) {
+    //            throw new Error("You already registered dude.")
+    //        }
+    //        console.log(result);
+    //        var sql2 = `INSERT INTO seasons_users (user_id, season_id) VALUES ($1, 2) RETURNING user_id;`
+    //        var result2 = await pool.query(sql2, [result.rows[0].id]);
+    //        console.log(result2);
+    //        if (result.rowCount < 1) { throw new Error("You must link your gamertag first.") }
+    //        if (result2.rowCount < 1) {
+    //            throw new Error(`Server Error`);
+    //        }
+    //        message.member.addRole(role);
+    //        message.channel.send("You are now a registered competitor for the Halo Draft League!")
+    //    } catch (e) {
+    //        console.log(e);
+    //        message.channel.send(`Something went wrong, you were not successfully registered. ${e.message}`)
+    //    }
+    //}
 
     if (message.content.substring(0, 12) === "!leaguecount") {
-        var sql = `SELECT * FROM users WHERE registered = true`;
+        var sql = `SELECT COUNT(*) FROM seasons_users WHERE season_id = 2;`;
         try {
             var total = await pool.query(sql);
-            message.channel.send(`There are ${total.rowCount} registered participants for the upcoming league!`)
+            console.log(total);
+            message.channel.send(`There are ${total.rows[0].count} registered participants for the upcoming league!`)
         } catch (e) {
             message.channel.send("Whoops something went wrong. Someone slap BruiseR-!");
         }
@@ -137,9 +151,11 @@ bot.on('message', async message => {
     if (message.content.substring(0, 11) === "!quitleague") {
         var user = message.member;
         try {
-            var sql = `UPDATE users SET registered = false WHERE discord_id = $1`;
-            var removed = await pool.query(sql, [user.id]);
-            var role = message.member.guild.roles.find("name", "League Competitor");
+            var findPlayer = `SELECT * FROM users WHERE discord_id = $1;`;
+            var player = await pool.query(findPlayer, [user.id]);
+            var sql = `DELETE FROM seasons_users WHERE user_id = $1`;
+            var removed = await pool.query(sql, [player.rows[0].id]);
+            var role = message.member.guild.roles.find(role => role.name == "Season 2 League Competitor");
             message.member.removeRole(role);
             message.channel.send("Aww. Sorry to see you go! I removed you from the league.")
         } catch (e) {
@@ -168,6 +184,23 @@ bot.on('message', async message => {
         } catch (e) {
             console.log(e)
             message.channel.send("I do not know who that is.")
+        }
+    }
+
+    if (message.content.substring(0, 15) === "!getregistered") {
+        console.log("compiling ")
+        try {
+            var sql = "SELECT * FROM seasons_users JOIN users on seasons_users.user_id = users.id WHERE seasons_users.season_id = 2;";
+            var users = await pool.query(sql);
+            var csvData = [];
+            users.rows.forEach(item => { 
+                console.log(item)
+                csvData.push({ "gamertag": item.gamertag })
+            })
+            console.log("data", csvData)
+            stringify(csvData, (err, output) => { console.log("stringified data", output); console.log("error", err) })
+        } catch (e) {
+            console.log(e)
         }
     }
 
@@ -223,6 +256,7 @@ bot.on('message', async message => {
                         } else {
                             highestCsr = "No CSR data available.";
                         }
+                        var tier = csr == "Champion" || csr == "Onyx" ? data.Results[0].Result.ArenaStats.HighestCsrAttained.Csr : data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier;
                         csvData.push({
                             gamertag: data.Results[0].Id,
                             kills: data.Results[0].Result.ArenaStats.TotalKills,
@@ -232,7 +266,7 @@ bot.on('message', async message => {
                             AvgDmgGm: avgDmgGm,
                             accuracy: Math.round((data.Results[0].Result.ArenaStats.TotalShotsLanded/data.Results[0].Result.ArenaStats.TotalShotsFired)*100),
                             group: `${csr}`,
-                            tier: `${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+                            tier: tier
                         })
                         var lastGt = users.rows[users.rows.length -1].gamertag;
                         var isLast = lastGt == data.Results[0].Id;
@@ -311,6 +345,7 @@ function buildEmbed(data, author) {
         var accuracy = Math.round((landed/shots)*100);
         var csr;
         var highestCsr;
+        var totalTimePlayed = data.Results[0].Result.ArenaStats.TotalTimePlayed;
         var authorImage;
         if (data.Results[0].Result.ArenaStats.HighestCsrAttained != null) {
             switch (data.Results[0].Result.ArenaStats.HighestCsrAttained.DesignationId) {
@@ -340,8 +375,8 @@ function buildEmbed(data, author) {
                 case 7:
                     csr = "Champion"
                     break;
-            }
-            highestCsr = `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`
+            } 
+            highestCsr = csr == "Champion" || csr == "Onyx" ? `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Csr}` : `${csr} ${data.Results[0].Result.ArenaStats.HighestCsrAttained.Tier}`;  
         } else {
             highestCsr = "No CSR data available.";
             authorImage = "";

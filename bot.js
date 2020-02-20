@@ -27,8 +27,7 @@ bot.on("guildMemberAdd", async member => {
             member.addRole(role).catch(err => console.log(err));
         }
     } catch (e) {
-        console.log("Member add error", e);
-        channel.send(`Welcome to the Halo Draft League's Discord Channel ${member}. Please link your XBL gamertag by typing !linkgt followed by your gamertag. \`!linkgt itsme\``)
+        console.log("Member add error", e)
     }
 });
 

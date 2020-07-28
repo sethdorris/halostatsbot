@@ -1,7 +1,6 @@
 var Discord = require('discord.js');
 const haloApiKey = process.env.HALO_KEY; ///<<< Get your own halo api key at https://developer.haloapi.com/
 var fetch = require("node-fetch");
-var config = require("./dbconfig");
 var bot = new Discord.Client();
 var fs = require("fs");
 var pg = require("pg");

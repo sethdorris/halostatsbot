@@ -49,3 +49,7 @@ build/bundle.js.map
 
 
 *.njsproj
+
+dbconfig.js
+
+./vs

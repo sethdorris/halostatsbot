@@ -23,5 +23,8 @@
     "pg": "^7.6.1",
     "sodium": "^2.0.1",
     "uws": "^0.14.5"
+  },
+  "scripts": {
+    "start": "node ./bot.js"
   }
 }

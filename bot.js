@@ -1,5 +1,5 @@
 var Discord = require('discord.js');
-const haloApiKey = ""; ///<<< Get your own halo api key at https://developer.haloapi.com/
+const haloApiKey = process.env.HALO_KEY; ///<<< Get your own halo api key at https://developer.haloapi.com/
 var fetch = require("node-fetch");
 var config = require("./dbconfig");
 var bot = new Discord.Client();
@@ -7,8 +7,9 @@ var fs = require("fs");
 var pg = require("pg");
 var Timeout = require("await-timeout")
 var stringify = require('csv-stringify');
-const pool = new pg.Pool(dbconfig.development);
-bot.login(config.production.discordKey); ///<<< Bot aka Application Token for Discord https://discordapp.com/developers/applications .. create a bot and then under
+
+const pool = new pg.Pool(process.env.CONNECTION_STRING);
+bot.login(process.env.DISCORD_KEY); ///<<< Bot aka Application Token for Discord https://discordapp.com/developers/applications .. create a bot and then under
 //your applications select the bot then click SETTINGS > BOT > and under the BOTs USERNAME click SHOW TOKEN .... that goes inside the quotes of bot.login("")
 
 bot.on("ready", () => {

@@ -32,7 +32,7 @@ bot.on("guildMemberAdd", async member => {
     }
 });
 
-bot.on("guildMemberRemove", function (member) {
+bot.on("guildMemberRemove", member => {
     console.log("Someone left");
     var channel = member.guild.channels.find("name", "general");
     channel.send(`${member} has left the server.`);

@@ -8,6 +8,7 @@ var Timeout = require("await-timeout")
 var stringify = require('csv-stringify');
 
 const pool = new pg.Pool(process.env.CONNECTION_STRING);
+console.log(process.env.DISCORD_KEY);
 bot.login(process.env.DISCORD_KEY); ///<<< Bot aka Application Token for Discord https://discordapp.com/developers/applications .. create a bot and then under
 //your applications select the bot then click SETTINGS > BOT > and under the BOTs USERNAME click SHOW TOKEN .... that goes inside the quotes of bot.login("")
 console.log("hi");

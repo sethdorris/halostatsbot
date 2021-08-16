@@ -118,7 +118,7 @@ bot.on('message', async message => {
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
             var participants = message.guild.roles.get("876837561996283915").members.map(m => m.displayName);
-            var embed = new client.RichEmbed({
+            var embed = new Discord.RichEmbed({
                 "title": "Season 6 Competitors",
                 "description": participants.join("\n"),
                 "color": 0xFFFF

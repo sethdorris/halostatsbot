@@ -116,11 +116,11 @@ bot.on('message', async message => {
 
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
-            var seasonCompetitors = message.guild.members.map(x => x.roles.find(x => x.name == "season6-competitor"));
             console.log(message.guild.members);
             console.log(message.guild.members[0]);
             console.log(message.guild.members[0].roles)
             console.log(message.guild.members[0].roles[0])
+            var seasonCompetitors = message.guild.members.map(x => x.roles.find(x => x.name == "season6-competitor"));
             message.channel.send(`There are ${seasonCompetitors.count} registered participants for the upcoming league!`)
         } catch (e) {
             message.channel.send("Whoops something went wrong. Someone slap BruiseR-!");

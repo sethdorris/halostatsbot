@@ -118,6 +118,7 @@ bot.on('message', async message => {
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
             let membersWithRole = message.guild.members.filter(member => {
+                console.log("member", member);
                 return member.roles.find(x => x.name == "Season 6 Competitor");
             });
             console.log("The member", membersWithRole[0]);

@@ -117,10 +117,9 @@ bot.on('message', async message => {
 
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
-            let membersWithRole = message.guild.members.filter(member => {
-                console.log("member", member);
-                return member.roles.find(x => x.name == "Season 6 Competitor");
-            }).map(x => x.nickname);
+            console.log("guild members", message.guild.members.length);
+            let membersWithRole = message.guild.members.filter(member => member.roles.find("name", "Season 6 Competitor"))
+                .map(x => x.nickname);
             console.log("The member", membersWithRole[0]);
             console.log("participants", membersWithRole);
             var embed = new Discord.RichEmbed({

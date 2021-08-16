@@ -119,14 +119,14 @@ bot.on('message', async message => {
         try {
             let membersWithRole = message.guild.members.filter(member => {
                 return member.roles.find(x => x.name == "Season 6 Competitor");
-            }).map(x => x.GuildMember.nickname);
+            });
+            console.log("The member", membersWithRole[0]);
             console.log("participants", membersWithRole);
             var embed = new Discord.RichEmbed({
                 "title": "Season 6 Competitors",
                 "description": membersWithRole.join("\n"),
                 "color": 0xFFFF
             });
-            message.channel.send(`There are ${participants.count} registered participants for the upcoming league!`);
             message.channel.send({ embed });
             return;
         } catch (e) {

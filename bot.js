@@ -117,11 +117,15 @@ bot.on('message', async message => {
 
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
-            var participants = message.guild.roles.get("876837561996283915");
-            console.log("participants", participants);
+            let membersWithRole = message.guild.members.filter(member => {
+                return member.roles.find(x => x.name == "Season 6 Competitor");
+            }).map(member => {
+                return member.user.displayName;
+            })
+            console.log("participants", membersWithRole);
             var embed = new Discord.RichEmbed({
                 "title": "Season 6 Competitors",
-                "description": participants.join("\n"),
+                "description": membersWithRole.join("\n"),
                 "color": 0xFFFF
             });
             message.channel.send(`There are ${participants.count} registered participants for the upcoming league!`);

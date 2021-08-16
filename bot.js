@@ -113,7 +113,7 @@ bot.on('message', async message => {
             message.channel.send("Whoops something went wrong.")
         }
     }
-
+    console.log("Logging logging")
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
             console.log(message.guild.members);

@@ -10,7 +10,7 @@ var stringify = require('csv-stringify');
 const pool = new pg.Pool(process.env.CONNECTION_STRING);
 bot.login(process.env.DISCORD_KEY); ///<<< Bot aka Application Token for Discord https://discordapp.com/developers/applications .. create a bot and then under
 //your applications select the bot then click SETTINGS > BOT > and under the BOTs USERNAME click SHOW TOKEN .... that goes inside the quotes of bot.login("")
-
+console.log("hi");
 bot.on("ready", () => {
     console.log("bot is operational");
 });

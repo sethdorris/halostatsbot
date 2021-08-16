@@ -114,15 +114,17 @@ bot.on('message', async message => {
             message.channel.send("Whoops something went wrong.")
         }
     }
-    console.log("Logging logging")
+
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
-            console.log(message.guild.members);
-            console.log(message.guild.members[0]);
-            console.log(message.guild.members[0].roles)
-            console.log(message.guild.members[0].roles[0])
-            var seasonCompetitors = message.guild.members.map(x => x.roles.find(x => x.name == "season6-competitor"));
-            message.channel.send(`There are ${seasonCompetitors.count} registered participants for the upcoming league!`)
+            var participants = message.guild.roles.get("876837561996283915").members.map(m => m.displayName);
+            var embed = new client.RichEmbed({
+                "title": "Season 6 Competitors",
+                "description": participants.join("\n"),
+                "color": 0xFFFF
+            });
+            message.channel.send(`There are ${participants.count} registered participants for the upcoming league!`);
+            message.channel.send({ embed });
         } catch (e) {
             console.log("error", e);
             message.channel.send("Whoops something went wrong. Someone slap BruiseR-!");

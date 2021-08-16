@@ -94,7 +94,7 @@ bot.on('message', async message => {
     }
 
     if (message.content.substring(0, 12) === "!servercount") {
-        message.channel.send(`There are ${message.guild.members.filter(member => !member.user.bot).size} players in the server`);
+        message.channel.send(`There are ${message.guild.memberCount} players in the server`);
     }
 
     if (message.content.substring(0, 7) === "!showgt") {

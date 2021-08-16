@@ -120,7 +120,7 @@ bot.on('message', async message => {
             let membersWithRole = message.guild.members.filter(member => {
                 console.log("member", member);
                 return member.roles.find(x => x.name == "Season 6 Competitor");
-            });
+            }).map(x => x.nickname);
             console.log("The member", membersWithRole[0]);
             console.log("participants", membersWithRole);
             var embed = new Discord.RichEmbed({

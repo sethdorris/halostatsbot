@@ -8,7 +8,6 @@ var Timeout = require("await-timeout")
 var stringify = require('csv-stringify');
 
 const pool = new pg.Pool(process.env.CONNECTION_STRING);
-console.log(process.env.DISCORD_KEY);
 bot.login(process.env.DISCORD_KEY); ///<<< Bot aka Application Token for Discord https://discordapp.com/developers/applications .. create a bot and then under
 //your applications select the bot then click SETTINGS > BOT > and under the BOTs USERNAME click SHOW TOKEN .... that goes inside the quotes of bot.login("")
 console.log("hi");
@@ -117,8 +116,8 @@ bot.on('message', async message => {
 
     if (message.content.substring(0, 12) === "!leaguecount") {
         try {
-            console.log("guild members", message.guild.members.length);
-            let membersWithRole = message.guild.members.filter(member => member.roles.find("name", "Season 6 Competitor"))
+            console.log("guild members", message.guild.members);
+            let membersWithRole = message.guild.members.filter(member => member.roles.find(x => x.name == "Season 6 Competitor"))
                 .map(x => x.nickname);
             console.log("The member", membersWithRole[0]);
             console.log("participants", membersWithRole);
